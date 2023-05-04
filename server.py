@@ -13,6 +13,8 @@ if __name__ == '__main__':
 
     # 创建服务处理器
     handler = UappService()
+    handler.bindLogger(LOGGER)
+    
     processor = UService.Processor(handler)
 
     # 创建服务器套接字

@@ -6,7 +6,7 @@ SERVER_PORT = 7860
 
 ALL_ONLINE_USERS = []
 
-ITEMS_IMG_ROOT = "C:\\Users\\Administrator\\Desktop\\Userver\\itemimgs\\"
+ITEMS_IMG_ROOT = "C:\\Users\\Administrator\\Desktop\\Uapp\\itemimgs\\"
 
 LOG_SAVE_PATH = "server.log"
 

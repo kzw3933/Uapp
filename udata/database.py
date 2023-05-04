@@ -84,11 +84,11 @@ class DB:
             cursor.close()
 
     # 插入物品数据
-    def insert_item(self, item_type, item_img_path, item_location, item_description):
+    def insert_item(self, item_time, item_type, item_img_path, item_img_name, item_location, item_description):
         cursor = self.conn.cursor()
-        sql = "INSERT INTO Item(ItemType, ItemImgPath, ItemLocation, ItemDescription) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO Item(ItemTime, ItemType, ItemImgPath, ItemImgName, ItemLocation, ItemDescription) VALUES (%s, %s, %s, %s, %s, %s)"
         try:
-            cursor.execute(sql, (item_type, item_img_path, item_location, item_description))
+            cursor.execute(sql, (item_time, item_type, item_img_path, item_img_name, item_location, item_description))
             self.conn.commit()
             return cursor.lastrowid
         except Exception as e:
@@ -99,11 +99,11 @@ class DB:
             cursor.close()
 
     # 插入帖子数据
-    def insert_post(self, student_id, item_id, is_for_lost, post_content):
+    def insert_post(self, student_id, item_id, is_for_lost, available, post_date):
         cursor = self.conn.cursor()
-        sql = "INSERT INTO Post(StudentID, ItemID, IsForLost, PostContent) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO Post(StudentID, ItemID, IsForLost, Available, PostTime) VALUES (%s, %s, %s, %s, %s)"
         try:
-            cursor.execute(sql, (student_id, item_id, is_for_lost, post_content))
+            cursor.execute(sql, (student_id, item_id, is_for_lost, available, post_date))
             self.conn.commit()
             return cursor.lastrowid
         except Exception as e:
@@ -114,9 +114,11 @@ class DB:
             cursor.close()
 
     # 查询帖子数据
-    def query_post(self):
+    def query_post_by10(self):
         cursor = self.conn.cursor()
-        sql = "SELECT * FROM Post"
+        sql = "SELECT Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
+        Post.Available, UNIX_TIMESTAMP(Item.ItemTime), Item.ItemDescription, UNIX_TIMESTAMP(Post.PostTime) FROM Post, Item WHERE Post.ItemID=Item.ItemID AND\
+        Post.IsForLost=True ORDER BY PostTime LIMIT 10"
         try:
             cursor.execute(sql)
             result = cursor.fetchall()
