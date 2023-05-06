@@ -177,6 +177,7 @@ class LoginInfo(object):
 class PostInfo(object):
     """
     Attributes:
+     - post_id
      - student_id
      - for_lost_item
      - item_image
@@ -191,7 +192,8 @@ class PostInfo(object):
     """
 
 
-    def __init__(self, student_id=None, for_lost_item=None, item_image=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None,):
+    def __init__(self, post_id=None, student_id=None, for_lost_item=None, item_image=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None,):
+        self.post_id = post_id
         self.student_id = student_id
         self.for_lost_item = for_lost_item
         self.item_image = item_image
@@ -214,50 +216,55 @@ class PostInfo(object):
                 break
             if fid == 1:
                 if ftype == TType.STRING:
-                    self.student_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                    self.post_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
+                if ftype == TType.STRING:
+                    self.student_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
                 if ftype == TType.BOOL:
                     self.for_lost_item = iprot.readBool()
                 else:
                     iprot.skip(ftype)
-            elif fid == 3:
+            elif fid == 4:
                 if ftype == TType.STRING:
                     self.item_image = iprot.readBinary()
                 else:
                     iprot.skip(ftype)
-            elif fid == 4:
+            elif fid == 5:
                 if ftype == TType.STRING:
                     self.image_name = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 5:
+            elif fid == 6:
                 if ftype == TType.STRING:
                     self.item_type = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 6:
+            elif fid == 7:
                 if ftype == TType.STRING:
                     self.item_position = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 7:
+            elif fid == 8:
                 if ftype == TType.BOOL:
                     self.status = iprot.readBool()
                 else:
                     iprot.skip(ftype)
-            elif fid == 8:
+            elif fid == 9:
                 if ftype == TType.I64:
                     self.lost_time = iprot.readI64()
                 else:
                     iprot.skip(ftype)
-            elif fid == 9:
+            elif fid == 10:
                 if ftype == TType.STRING:
                     self.item_desc = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 10:
+            elif fid == 11:
                 if ftype == TType.I64:
                     self.date = iprot.readI64()
                 else:
@@ -272,44 +279,48 @@ class PostInfo(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('PostInfo')
+        if self.post_id is not None:
+            oprot.writeFieldBegin('post_id', TType.STRING, 1)
+            oprot.writeString(self.post_id.encode('utf-8') if sys.version_info[0] == 2 else self.post_id)
+            oprot.writeFieldEnd()
         if self.student_id is not None:
-            oprot.writeFieldBegin('student_id', TType.STRING, 1)
+            oprot.writeFieldBegin('student_id', TType.STRING, 2)
             oprot.writeString(self.student_id.encode('utf-8') if sys.version_info[0] == 2 else self.student_id)
             oprot.writeFieldEnd()
         if self.for_lost_item is not None:
-            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 2)
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 3)
             oprot.writeBool(self.for_lost_item)
             oprot.writeFieldEnd()
         if self.item_image is not None:
-            oprot.writeFieldBegin('item_image', TType.STRING, 3)
+            oprot.writeFieldBegin('item_image', TType.STRING, 4)
             oprot.writeBinary(self.item_image)
             oprot.writeFieldEnd()
         if self.image_name is not None:
-            oprot.writeFieldBegin('image_name', TType.STRING, 4)
+            oprot.writeFieldBegin('image_name', TType.STRING, 5)
             oprot.writeString(self.image_name.encode('utf-8') if sys.version_info[0] == 2 else self.image_name)
             oprot.writeFieldEnd()
         if self.item_type is not None:
-            oprot.writeFieldBegin('item_type', TType.STRING, 5)
+            oprot.writeFieldBegin('item_type', TType.STRING, 6)
             oprot.writeString(self.item_type.encode('utf-8') if sys.version_info[0] == 2 else self.item_type)
             oprot.writeFieldEnd()
         if self.item_position is not None:
-            oprot.writeFieldBegin('item_position', TType.STRING, 6)
+            oprot.writeFieldBegin('item_position', TType.STRING, 7)
             oprot.writeString(self.item_position.encode('utf-8') if sys.version_info[0] == 2 else self.item_position)
             oprot.writeFieldEnd()
         if self.status is not None:
-            oprot.writeFieldBegin('status', TType.BOOL, 7)
+            oprot.writeFieldBegin('status', TType.BOOL, 8)
             oprot.writeBool(self.status)
             oprot.writeFieldEnd()
         if self.lost_time is not None:
-            oprot.writeFieldBegin('lost_time', TType.I64, 8)
+            oprot.writeFieldBegin('lost_time', TType.I64, 9)
             oprot.writeI64(self.lost_time)
             oprot.writeFieldEnd()
         if self.item_desc is not None:
-            oprot.writeFieldBegin('item_desc', TType.STRING, 9)
+            oprot.writeFieldBegin('item_desc', TType.STRING, 10)
             oprot.writeString(self.item_desc.encode('utf-8') if sys.version_info[0] == 2 else self.item_desc)
             oprot.writeFieldEnd()
         if self.date is not None:
-            oprot.writeFieldBegin('date', TType.I64, 10)
+            oprot.writeFieldBegin('date', TType.I64, 11)
             oprot.writeI64(self.date)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -435,16 +446,17 @@ LoginInfo.thrift_spec = (
 all_structs.append(PostInfo)
 PostInfo.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'student_id', 'UTF8', None, ),  # 1
-    (2, TType.BOOL, 'for_lost_item', None, None, ),  # 2
-    (3, TType.STRING, 'item_image', 'BINARY', None, ),  # 3
-    (4, TType.STRING, 'image_name', 'UTF8', None, ),  # 4
-    (5, TType.STRING, 'item_type', 'UTF8', None, ),  # 5
-    (6, TType.STRING, 'item_position', 'UTF8', None, ),  # 6
-    (7, TType.BOOL, 'status', None, None, ),  # 7
-    (8, TType.I64, 'lost_time', None, None, ),  # 8
-    (9, TType.STRING, 'item_desc', 'UTF8', "", ),  # 9
-    (10, TType.I64, 'date', None, None, ),  # 10
+    (1, TType.STRING, 'post_id', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'student_id', 'UTF8', None, ),  # 2
+    (3, TType.BOOL, 'for_lost_item', None, None, ),  # 3
+    (4, TType.STRING, 'item_image', 'BINARY', None, ),  # 4
+    (5, TType.STRING, 'image_name', 'UTF8', None, ),  # 5
+    (6, TType.STRING, 'item_type', 'UTF8', None, ),  # 6
+    (7, TType.STRING, 'item_position', 'UTF8', None, ),  # 7
+    (8, TType.BOOL, 'status', None, None, ),  # 8
+    (9, TType.I64, 'lost_time', None, None, ),  # 9
+    (10, TType.STRING, 'item_desc', 'UTF8', "", ),  # 10
+    (11, TType.I64, 'date', None, None, ),  # 11
 )
 all_structs.append(ReplyInfo)
 ReplyInfo.thrift_spec = (

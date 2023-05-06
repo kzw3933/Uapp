@@ -13,16 +13,17 @@ struct LoginInfo {
 }
 
 struct PostInfo {
-    1: string student_id;
-    2: bool for_lost_item;
-    3: binary item_image;
-    4: string image_name;
-    5: string item_type;
-    6: string item_position;
-    7: bool status;
-    8: i64 lost_time;
-    9: string item_desc="";
-    10: i64 date;
+    1: string post_id;
+    2: string student_id;
+    3: bool for_lost_item;
+    4: binary item_image;
+    5: string image_name;
+    6: string item_type;
+    7: string item_position;
+    8: bool status;
+    9: i64 lost_time;
+    10: string item_desc="";
+    11: i64 date;
 }
 
 struct ReplyInfo {
@@ -38,6 +39,8 @@ service UappService {
     RegisterInfo getUserInfo(1: string student_id);
     bool uploadPost(1: PostInfo info);
     list<PostInfo> getPostBy10();
+    list<PostInfo> searchNext10(1: string searchText,2: string post_id ,3: bool searchEnable)//向后翻页，返回10条信息
+    list<PostInfo> searchPrev10(1: string searchText,2: string post_id ,3: bool searchEnable)//向前翻页，返回10条信息
     bool uploadReply(1: ReplyInfo info);
     list<ReplyInfo> getAllReply(1: i32 post_id);
 }

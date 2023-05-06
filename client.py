@@ -16,18 +16,18 @@ client = UappService.Client(protocol) # 创建 ExampleService.Client 对象，�
 transport.open()
 
 # 调用远程接口
-register_info = RegisterInfo('PB20061338', 'kzw1338', '23982092040', '123456')
-client.register(register_info)
-img = Image.open(r'C:\Users\Administrator\Desktop\Uapp\design.png')
-buffered = BytesIO()
-img.save(buffered, format='PNG')
-img_byte = buffered.getvalue()
-for i in range(20):
-    postinfo = PostInfo('PB20061338', True, img_byte, 'test'+str(i), 'test', 'test', True, 12682379484, "山地车", 1628372838, str(i))
-    client.uploadPost(postinfo)
-# result = client.searchNext10("山地车", 0,True)
-# for i in result:
-#     print(i)
+# register_info = RegisterInfo('PB20061338', 'kzw1338', '23982092040', '123456')
+# client.register(register_info)
+# img = Image.open(r'C:\Users\Administrator\Desktop\Uapp\design.png')
+# buffered = BytesIO()
+# img.save(buffered, format='PNG')
+# img_byte = buffered.getvalue()
+# for i in range(20):
+#     postinfo = PostInfo(str(i), 'PB20061338', True, img_byte, 'test'+str(i), 'test', 'test', True, 12682379484, "山地车", 1628372838)
+#     client.uploadPost(postinfo)
+result = client.searchNext10("山地车", str(0),True)
+for i in result:
+    print(i)
 
 # 关闭连接
 transport.close()

@@ -99,11 +99,11 @@ class DB:
             cursor.close()
 
     # 插入帖子数据
-    def insert_post(self, student_id, item_id, is_for_lost, available, post_date):
+    def insert_post(self, post_id, student_id, item_id, is_for_lost, available, post_date):
         cursor = self.conn.cursor()
-        sql = "INSERT INTO Post(StudentID, ItemID, IsForLost, Available, PostTime) VALUES (%s, %s, %s, %s, %s)"
+        sql = "INSERT INTO Post(PostID, StudentID, ItemID, IsForLost, Available, PostTime) VALUES (%s, %s, %s, %s, %s, %s)"
         try:
-            cursor.execute(sql, (student_id, item_id, is_for_lost, available, post_date))
+            cursor.execute(sql, (post_id, student_id, item_id, is_for_lost, available, post_date))
             self.conn.commit()
             return cursor.lastrowid
         except Exception as e:
@@ -116,9 +116,54 @@ class DB:
     # 查询帖子数据
     def query_post_by10(self):
         cursor = self.conn.cursor()
-        sql = "SELECT Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
+        sql = "SELECT Post.PostID, Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         Post.Available, UNIX_TIMESTAMP(Item.ItemTime), Item.ItemDescription, UNIX_TIMESTAMP(Post.PostTime) FROM Post, Item WHERE Post.ItemID=Item.ItemID AND\
         Post.IsForLost=True ORDER BY PostTime LIMIT 10"
+        try:
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            return result
+        except Exception as e:
+            self.logger.error("Query post error:", e)
+            return None
+        finally:
+            cursor.close()
+            
+    def query_post_by_ids(self, last_id, related_ids):
+        cursor = self.conn.cursor()
+        sql = f"SELECT Post.PostID, Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
+        Post.Available, UNIX_TIMESTAMP(Item.ItemTime), Item.ItemDescription, UNIX_TIMESTAMP(Post.PostTime) FROM Post, Item WHERE Post.ItemID=Item.ItemID AND\
+        Post.IsForLost=True AND PostID IN {tuple(related_ids)} AND UNIX_TIMESTAMP(Post.PostTime) <= (SELECT UNIX_TIMESTAMP(PostTime) FROM Post WHERE PostID = {last_id}) ORDER BY PostTime LIMIT 10"
+        try:
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            return result
+        except Exception as e:
+            self.logger.error("Query post error:", e)
+            return None
+        finally:
+            cursor.close()
+            
+    def query_next_post_by10(self, last_id):
+        cursor = self.conn.cursor()
+        sql = f"SELECT Post.PostID, Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
+        Post.Available, UNIX_TIMESTAMP(Item.ItemTime), Item.ItemDescription, UNIX_TIMESTAMP(Post.PostTime) FROM Post, Item WHERE Post.ItemID=Item.ItemID AND\
+        Post.IsForLost=True AND UNIX_TIMESTAMP(Post.PostTime) < (SELECT UNIX_TIMESTAMP(PostTime) FROM Post WHERE PostID = {last_id}) ORDER BY PostTime LIMIT 10"
+        try:
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            return result
+        except Exception as e:
+            self.logger.error("Query post error:", e)
+            return None
+        finally:
+            cursor.close()
+    
+    def query_prev_post_by10(self, last_id, related_ids):
+        cursor = self.conn.cursor()
+        sql = f"SELECT Post.PostID, Post.StudentID, Post.IsForLost, Item.ItemImgPath, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
+        Post.Available, UNIX_TIMESTAMP(Item.ItemTime), Item.ItemDescription, UNIX_TIMESTAMP(Post.PostTime) AS UTIME FROM Post, Item WHERE Post.ItemID=Item.ItemID AND\
+        Post.IsForLost=True AND UTIME > (SELECT UNIX_TIMESTAMP(Post.PostTime) FROM Post WHERE PostID = {last_id}) ORDER BY PostTime LIMIT 10"
         try:
             cursor.execute(sql)
             result = cursor.fetchall()
@@ -157,7 +202,5 @@ class DB:
             return None
         finally:
             cursor.close()
-
-
 
 

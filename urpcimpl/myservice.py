@@ -10,6 +10,9 @@ class UappService(UService.Iface):
     
     def bindLogger(self, logger):
         self.logger = logger
+        
+    def bindSearcher(self, searcher):
+        self.searcher = searcher
 
     def register(self, info):
         res = DBSERVER.insert_user(info.student_id, info.username, info.email, info.password)
@@ -17,7 +20,7 @@ class UappService(UService.Iface):
             self.logger.info(f"User {info.username} register successful")
             return True
         else:
-            self.logger.error(f"Error happen wher user {info.username} register") 
+            self.logger.error(f"Error happen when user {info.username} register") 
             return False
 
 
@@ -57,39 +60,57 @@ class UappService(UService.Iface):
         
         item_id = DBSERVER.insert_item(lost_time, info.item_type, img_path, info.image_name, info.item_position, info.item_desc)
 
-        if item_id:
-            res =  DBSERVER.insert_post(student_id, item_id, info.for_lost_item, info.status, post_date)
-            if res:
+        if item_id != None:
+            res =  DBSERVER.insert_post(info.post_id, student_id, item_id, info.for_lost_item, info.status, post_date)
+            if res != None:
+                self.searcher.update(info.post_id, info.item_type, info.item_position, info.item_desc)
                 self.logger.info(f"User with student_id {info.student_id} upload a post successfully")
                 return True
         self.logger.error(f"Error happend when user with student_id {student_id} upload post")
         return False
-
-
-
-    def uploadReply(self, info):
-        student_id = info.student_id
-        if student_id in ALL_ONLINE_USERS:
-            return DBSERVER.insert_reply(info.post_id, student_id, info.content)
-
-        return False
     
-    def getPostBy10(self):
+    def help_get_post(self, columns):
         res = []
-        columns = DBSERVER.query_post_by10()
         if columns:
             for column in columns:
                 try:
-                    img = Image.open(column[2])
-
+                    img = Image.open(column[3])
                     buffered = BytesIO()
                     img.save(buffered, format='PNG')
                     img_byte = buffered.getvalue()
-                    res.append(PostInfo(column[0], column[1], img_byte, column[3], column[4], column[5], column[6], column[7], column[8], column[9]))
+                    res.append(PostInfo(column[0], column[1], column[2],img_byte, column[4], column[5], column[6], column[7], column[8], column[9], column[10]))
                 except Exception as e:
                     self.logger.error("Get posts error:", e)
                     return []
         return res
+    
+    def getPostBy10(self):
+        columns = DBSERVER.query_post_by10()
+        return self.help_get_post(columns)
+    
+    def searchNext10(self, searchText, post_id, searchEnable):
+        if searchEnable:
+            related_post_ids = self.searcher.get_related_post_ids(searchText)
+            columns = DBSERVER.query_post_by_ids(post_id, related_post_ids)
+        else:
+            columns = DBSERVER.query_next_post_by10(post_id)
+            
+        return self.help_get_post(columns)
+            
+            
+    
+    def searchPrev10(self, searchText, post_id, searchEnable):
+        if searchEnable:
+            related_post_ids = self.get_related_post_ids(searchText)
+            columns = DBSERVER.query_post_by_ids(post_id, related_post_ids)
+        else:
+            columns = DBSERVER.query_prev_post_by10(post_id)
+            
+        return self.help_get_post(columns)
 
     def getAllReply(self, id):
         pass
+    
+    def uploadReply(self, info):
+        pass
+
