@@ -29,8 +29,8 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  RegisterInfo getUserInfo(string student_id)')
     print('  bool uploadPost(PostInfo info)')
     print('   getPostBy10()')
-    print('   searchNext10(string searchText, string post_id, bool searchEnable)')
-    print('   searchPrev10(string searchText, string post_id, bool searchEnable)')
+    print('   searchNext10(string searchText, string post_id, bool searchEnable, bool for_lost_item)')
+    print('   searchPrev10(string searchText, string post_id, bool searchEnable, bool for_lost_item)')
     print('  bool uploadReply(ReplyInfo info)')
     print('   getAllReply(i32 post_id)')
     print('')
@@ -143,16 +143,16 @@ elif cmd == 'getPostBy10':
     pp.pprint(client.getPostBy10())
 
 elif cmd == 'searchNext10':
-    if len(args) != 3:
-        print('searchNext10 requires 3 args')
+    if len(args) != 4:
+        print('searchNext10 requires 4 args')
         sys.exit(1)
-    pp.pprint(client.searchNext10(args[0], args[1], eval(args[2]),))
+    pp.pprint(client.searchNext10(args[0], args[1], eval(args[2]), eval(args[3]),))
 
 elif cmd == 'searchPrev10':
-    if len(args) != 3:
-        print('searchPrev10 requires 3 args')
+    if len(args) != 4:
+        print('searchPrev10 requires 4 args')
         sys.exit(1)
-    pp.pprint(client.searchPrev10(args[0], args[1], eval(args[2]),))
+    pp.pprint(client.searchPrev10(args[0], args[1], eval(args[2]), eval(args[3]),))
 
 elif cmd == 'uploadReply':
     if len(args) != 1:

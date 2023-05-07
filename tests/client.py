@@ -25,7 +25,7 @@ img_byte = buffered.getvalue()
 for i in range(20):
     postinfo = PostInfo('PB20061338', True, img_byte, 'test'+str(i), 'test', 'test', True, 12682379484, "山地车", 1628372838, str(i))
     client.uploadPost(postinfo)
-# result = client.searchNext10("山地车", 0,True)
+# result = client.searchNext10("山地车", 0,True, True)
 # for i in result:
 #     print(i)
 

@@ -38,9 +38,9 @@ service UappService {
     bool login(1: LoginInfo info);
     RegisterInfo getUserInfo(1: string student_id);
     bool uploadPost(1: PostInfo info);
-    list<PostInfo> getPostBy10();
-    list<PostInfo> searchNext10(1: string searchText,2: string post_id ,3: bool searchEnable)//向后翻页，返回10条信息
-    list<PostInfo> searchPrev10(1: string searchText,2: string post_id ,3: bool searchEnable)//向前翻页，返回10条信息
+    list<PostInfo> getPostBy10(1: bool for_lost_item);
+    list<PostInfo> searchNext10(1: string searchText,2: string post_id ,3: bool searchEnable, 4: bool for_lost_item)//向后翻页，返回10条信息
+    list<PostInfo> searchPrev10(1: string searchText,2: string post_id ,3: bool searchEnable, 4: bool for_lost_item)//向前翻页，返回10条信息
     bool uploadReply(1: ReplyInfo info);
     list<ReplyInfo> getAllReply(1: i32 post_id);
 }

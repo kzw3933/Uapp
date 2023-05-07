@@ -54,22 +54,24 @@ class Iface(object):
     def getPostBy10(self):
         pass
 
-    def searchNext10(self, searchText, post_id, searchEnable):
+    def searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
         """
         Parameters:
          - searchText
          - post_id
          - searchEnable
+         - for_lost_item
 
         """
         pass
 
-    def searchPrev10(self, searchText, post_id, searchEnable):
+    def searchPrev10(self, searchText, post_id, searchEnable, for_lost_item):
         """
         Parameters:
          - searchText
          - post_id
          - searchEnable
+         - for_lost_item
 
         """
         pass
@@ -252,23 +254,25 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "getPostBy10 failed: unknown result")
 
-    def searchNext10(self, searchText, post_id, searchEnable):
+    def searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
         """
         Parameters:
          - searchText
          - post_id
          - searchEnable
+         - for_lost_item
 
         """
-        self.send_searchNext10(searchText, post_id, searchEnable)
+        self.send_searchNext10(searchText, post_id, searchEnable, for_lost_item)
         return self.recv_searchNext10()
 
-    def send_searchNext10(self, searchText, post_id, searchEnable):
+    def send_searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
         self._oprot.writeMessageBegin('searchNext10', TMessageType.CALL, self._seqid)
         args = searchNext10_args()
         args.searchText = searchText
         args.post_id = post_id
         args.searchEnable = searchEnable
+        args.for_lost_item = for_lost_item
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -288,23 +292,25 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "searchNext10 failed: unknown result")
 
-    def searchPrev10(self, searchText, post_id, searchEnable):
+    def searchPrev10(self, searchText, post_id, searchEnable, for_lost_item):
         """
         Parameters:
          - searchText
          - post_id
          - searchEnable
+         - for_lost_item
 
         """
-        self.send_searchPrev10(searchText, post_id, searchEnable)
+        self.send_searchPrev10(searchText, post_id, searchEnable, for_lost_item)
         return self.recv_searchPrev10()
 
-    def send_searchPrev10(self, searchText, post_id, searchEnable):
+    def send_searchPrev10(self, searchText, post_id, searchEnable, for_lost_item):
         self._oprot.writeMessageBegin('searchPrev10', TMessageType.CALL, self._seqid)
         args = searchPrev10_args()
         args.searchText = searchText
         args.post_id = post_id
         args.searchEnable = searchEnable
+        args.for_lost_item = for_lost_item
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -545,7 +551,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = searchNext10_result()
         try:
-            result.success = self._handler.searchNext10(args.searchText, args.post_id, args.searchEnable)
+            result.success = self._handler.searchNext10(args.searchText, args.post_id, args.searchEnable, args.for_lost_item)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -568,7 +574,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = searchPrev10_result()
         try:
-            result.success = self._handler.searchPrev10(args.searchText, args.post_id, args.searchEnable)
+            result.success = self._handler.searchPrev10(args.searchText, args.post_id, args.searchEnable, args.for_lost_item)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1249,14 +1255,16 @@ class searchNext10_args(object):
      - searchText
      - post_id
      - searchEnable
+     - for_lost_item
 
     """
 
 
-    def __init__(self, searchText=None, post_id=None, searchEnable=None,):
+    def __init__(self, searchText=None, post_id=None, searchEnable=None, for_lost_item=None,):
         self.searchText = searchText
         self.post_id = post_id
         self.searchEnable = searchEnable
+        self.for_lost_item = for_lost_item
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1282,6 +1290,11 @@ class searchNext10_args(object):
                     self.searchEnable = iprot.readBool()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1303,6 +1316,10 @@ class searchNext10_args(object):
         if self.searchEnable is not None:
             oprot.writeFieldBegin('searchEnable', TType.BOOL, 3)
             oprot.writeBool(self.searchEnable)
+            oprot.writeFieldEnd()
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 4)
+            oprot.writeBool(self.for_lost_item)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1326,6 +1343,7 @@ searchNext10_args.thrift_spec = (
     (1, TType.STRING, 'searchText', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'post_id', 'UTF8', None, ),  # 2
     (3, TType.BOOL, 'searchEnable', None, None, ),  # 3
+    (4, TType.BOOL, 'for_lost_item', None, None, ),  # 4
 )
 
 
@@ -1405,14 +1423,16 @@ class searchPrev10_args(object):
      - searchText
      - post_id
      - searchEnable
+     - for_lost_item
 
     """
 
 
-    def __init__(self, searchText=None, post_id=None, searchEnable=None,):
+    def __init__(self, searchText=None, post_id=None, searchEnable=None, for_lost_item=None,):
         self.searchText = searchText
         self.post_id = post_id
         self.searchEnable = searchEnable
+        self.for_lost_item = for_lost_item
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1438,6 +1458,11 @@ class searchPrev10_args(object):
                     self.searchEnable = iprot.readBool()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1459,6 +1484,10 @@ class searchPrev10_args(object):
         if self.searchEnable is not None:
             oprot.writeFieldBegin('searchEnable', TType.BOOL, 3)
             oprot.writeBool(self.searchEnable)
+            oprot.writeFieldEnd()
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 4)
+            oprot.writeBool(self.for_lost_item)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1482,6 +1511,7 @@ searchPrev10_args.thrift_spec = (
     (1, TType.STRING, 'searchText', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'post_id', 'UTF8', None, ),  # 2
     (3, TType.BOOL, 'searchEnable', None, None, ),  # 3
+    (4, TType.BOOL, 'for_lost_item', None, None, ),  # 4
 )
 
 
