@@ -1,0 +1,5 @@
+username = 'root'
+password = '123456'
+database = 'UAPP'
+sql_script = r'/home/vhicr/Desktop/Uapp/utils/data/script.sql'
+mysql_exec_path = r'/usr/bin/mysql'

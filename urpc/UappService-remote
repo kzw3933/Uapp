@@ -28,11 +28,11 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('  bool login(LoginInfo info)')
     print('  RegisterInfo getUserInfo(string student_id)')
     print('  bool uploadPost(PostInfo info)')
-    print('   getPostBy10()')
+    print('   getPostBy10(bool for_lost_item)')
     print('   searchNext10(string searchText, string post_id, bool searchEnable, bool for_lost_item)')
     print('   searchPrev10(string searchText, string post_id, bool searchEnable, bool for_lost_item)')
-    print('  bool uploadReply(ReplyInfo info)')
-    print('   getAllReply(i32 post_id)')
+    print('  DetailInfo reqDetail(ReqInfo req_info)')
+    print('  bool setUserInfo(SetUserInfo set_user_info)')
     print('')
     sys.exit(0)
 
@@ -137,10 +137,10 @@ elif cmd == 'uploadPost':
     pp.pprint(client.uploadPost(eval(args[0]),))
 
 elif cmd == 'getPostBy10':
-    if len(args) != 0:
-        print('getPostBy10 requires 0 args')
+    if len(args) != 1:
+        print('getPostBy10 requires 1 args')
         sys.exit(1)
-    pp.pprint(client.getPostBy10())
+    pp.pprint(client.getPostBy10(eval(args[0]),))
 
 elif cmd == 'searchNext10':
     if len(args) != 4:
@@ -154,17 +154,17 @@ elif cmd == 'searchPrev10':
         sys.exit(1)
     pp.pprint(client.searchPrev10(args[0], args[1], eval(args[2]), eval(args[3]),))
 
-elif cmd == 'uploadReply':
+elif cmd == 'reqDetail':
     if len(args) != 1:
-        print('uploadReply requires 1 args')
+        print('reqDetail requires 1 args')
         sys.exit(1)
-    pp.pprint(client.uploadReply(eval(args[0]),))
+    pp.pprint(client.reqDetail(eval(args[0]),))
 
-elif cmd == 'getAllReply':
+elif cmd == 'setUserInfo':
     if len(args) != 1:
-        print('getAllReply requires 1 args')
+        print('setUserInfo requires 1 args')
         sys.exit(1)
-    pp.pprint(client.getAllReply(eval(args[0]),))
+    pp.pprint(client.setUserInfo(eval(args[0]),))
 
 else:
     print('Unrecognized method %s' % cmd)

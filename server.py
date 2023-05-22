@@ -4,7 +4,7 @@ from thrift.protocol import TBinaryProtocol
 from thrift.server import TServer
 from urpc.ttypes import *
 from urpc import UappService as UService
-from urpcimpl.myservice import UappService
+from myservice import UappService
 
 
 if __name__ == '__main__':

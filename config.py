@@ -1,20 +1,21 @@
-import logger
-import udata.database
-import search.searcher
+import utils.log.logger as logger
+import utils.data.database
+import utils.search.searcher
 
-SERVER_IP = "127.0.0.1"
+SERVER_IP = "210.45.112.121"
 SERVER_PORT = 7860
 
-ALL_ONLINE_USERS = []
+ITEMS_FULL_IMG_ROOT = "/home/vhicr/Desktop/Uapp/imgs/items/full/"
+ITEMS_THUMB_IMG_ROOT = "/home/vhicr/Desktop/Uapp/imgs/items/thumb/"
 
-ITEMS_IMG_ROOT = "C:\\Users\\Administrator\\Desktop\\Uapp\\itemimgs\\"
+AVATAR_IMG_ROOT = "/home/vhicr/Desktop/Uapp/imgs/avatars/"
 
-LOG_SAVE_PATH = "server.log"
+LOG_SAVE_PATH = "/home/vhicr/Desktop/Uapp/logs/server.log"
 
 LOGGER = logger.UappLogger(LOG_SAVE_PATH)
 
-DBSERVER = udata.database.DB(LOGGER)
+DBSERVER = utils.data.database.DB(LOGGER)
 
-SEARCHER = search.searcher.Searcher()
+SEARCHER = utils.search.searcher.Searcher()
 
 

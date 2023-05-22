@@ -1,0 +1,2 @@
+/home/vhicr/Desktop/Uapp/utils/search/words_table_b.pkl
+/home/vhicr/Desktop/Uapp/utils/search/words_table_a.pkl

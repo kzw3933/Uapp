@@ -51,7 +51,12 @@ class Iface(object):
         """
         pass
 
-    def getPostBy10(self):
+    def getPostBy10(self, for_lost_item):
+        """
+        Parameters:
+         - for_lost_item
+
+        """
         pass
 
     def searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
@@ -76,18 +81,18 @@ class Iface(object):
         """
         pass
 
-    def uploadReply(self, info):
+    def reqDetail(self, req_info):
         """
         Parameters:
-         - info
+         - req_info
 
         """
         pass
 
-    def getAllReply(self, post_id):
+    def setUserInfo(self, set_user_info):
         """
         Parameters:
-         - post_id
+         - set_user_info
 
         """
         pass
@@ -228,13 +233,19 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "uploadPost failed: unknown result")
 
-    def getPostBy10(self):
-        self.send_getPostBy10()
+    def getPostBy10(self, for_lost_item):
+        """
+        Parameters:
+         - for_lost_item
+
+        """
+        self.send_getPostBy10(for_lost_item)
         return self.recv_getPostBy10()
 
-    def send_getPostBy10(self):
+    def send_getPostBy10(self, for_lost_item):
         self._oprot.writeMessageBegin('getPostBy10', TMessageType.CALL, self._seqid)
         args = getPostBy10_args()
+        args.for_lost_item = for_lost_item
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -330,24 +341,24 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "searchPrev10 failed: unknown result")
 
-    def uploadReply(self, info):
+    def reqDetail(self, req_info):
         """
         Parameters:
-         - info
+         - req_info
 
         """
-        self.send_uploadReply(info)
-        return self.recv_uploadReply()
+        self.send_reqDetail(req_info)
+        return self.recv_reqDetail()
 
-    def send_uploadReply(self, info):
-        self._oprot.writeMessageBegin('uploadReply', TMessageType.CALL, self._seqid)
-        args = uploadReply_args()
-        args.info = info
+    def send_reqDetail(self, req_info):
+        self._oprot.writeMessageBegin('reqDetail', TMessageType.CALL, self._seqid)
+        args = reqDetail_args()
+        args.req_info = req_info
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_uploadReply(self):
+    def recv_reqDetail(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -355,31 +366,31 @@ class Client(Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = uploadReply_result()
+        result = reqDetail_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "uploadReply failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "reqDetail failed: unknown result")
 
-    def getAllReply(self, post_id):
+    def setUserInfo(self, set_user_info):
         """
         Parameters:
-         - post_id
+         - set_user_info
 
         """
-        self.send_getAllReply(post_id)
-        return self.recv_getAllReply()
+        self.send_setUserInfo(set_user_info)
+        return self.recv_setUserInfo()
 
-    def send_getAllReply(self, post_id):
-        self._oprot.writeMessageBegin('getAllReply', TMessageType.CALL, self._seqid)
-        args = getAllReply_args()
-        args.post_id = post_id
+    def send_setUserInfo(self, set_user_info):
+        self._oprot.writeMessageBegin('setUserInfo', TMessageType.CALL, self._seqid)
+        args = setUserInfo_args()
+        args.set_user_info = set_user_info
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
 
-    def recv_getAllReply(self):
+    def recv_setUserInfo(self):
         iprot = self._iprot
         (fname, mtype, rseqid) = iprot.readMessageBegin()
         if mtype == TMessageType.EXCEPTION:
@@ -387,12 +398,12 @@ class Client(Iface):
             x.read(iprot)
             iprot.readMessageEnd()
             raise x
-        result = getAllReply_result()
+        result = setUserInfo_result()
         result.read(iprot)
         iprot.readMessageEnd()
         if result.success is not None:
             return result.success
-        raise TApplicationException(TApplicationException.MISSING_RESULT, "getAllReply failed: unknown result")
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "setUserInfo failed: unknown result")
 
 
 class Processor(Iface, TProcessor):
@@ -406,8 +417,8 @@ class Processor(Iface, TProcessor):
         self._processMap["getPostBy10"] = Processor.process_getPostBy10
         self._processMap["searchNext10"] = Processor.process_searchNext10
         self._processMap["searchPrev10"] = Processor.process_searchPrev10
-        self._processMap["uploadReply"] = Processor.process_uploadReply
-        self._processMap["getAllReply"] = Processor.process_getAllReply
+        self._processMap["reqDetail"] = Processor.process_reqDetail
+        self._processMap["setUserInfo"] = Processor.process_setUserInfo
         self._on_message_begin = None
 
     def on_message_begin(self, func):
@@ -528,7 +539,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = getPostBy10_result()
         try:
-            result.success = self._handler.getPostBy10()
+            result.success = self._handler.getPostBy10(args.for_lost_item)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -591,13 +602,13 @@ class Processor(Iface, TProcessor):
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
-    def process_uploadReply(self, seqid, iprot, oprot):
-        args = uploadReply_args()
+    def process_reqDetail(self, seqid, iprot, oprot):
+        args = reqDetail_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = uploadReply_result()
+        result = reqDetail_result()
         try:
-            result.success = self._handler.uploadReply(args.info)
+            result.success = self._handler.reqDetail(args.req_info)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -609,18 +620,18 @@ class Processor(Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("uploadReply", msg_type, seqid)
+        oprot.writeMessageBegin("reqDetail", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
-    def process_getAllReply(self, seqid, iprot, oprot):
-        args = getAllReply_args()
+    def process_setUserInfo(self, seqid, iprot, oprot):
+        args = setUserInfo_args()
         args.read(iprot)
         iprot.readMessageEnd()
-        result = getAllReply_result()
+        result = setUserInfo_result()
         try:
-            result.success = self._handler.getAllReply(args.post_id)
+            result.success = self._handler.setUserInfo(args.set_user_info)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -632,7 +643,7 @@ class Processor(Iface, TProcessor):
             logging.exception('Unexpected exception in handler')
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
-        oprot.writeMessageBegin("getAllReply", msg_type, seqid)
+        oprot.writeMessageBegin("setUserInfo", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -1137,7 +1148,15 @@ uploadPost_result.thrift_spec = (
 
 
 class getPostBy10_args(object):
+    """
+    Attributes:
+     - for_lost_item
 
+    """
+
+
+    def __init__(self, for_lost_item=None,):
+        self.for_lost_item = for_lost_item
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1148,6 +1167,11 @@ class getPostBy10_args(object):
             (fname, ftype, fid) = iprot.readFieldBegin()
             if ftype == TType.STOP:
                 break
+            if fid == 1:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1158,6 +1182,10 @@ class getPostBy10_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('getPostBy10_args')
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 1)
+            oprot.writeBool(self.for_lost_item)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -1176,6 +1204,8 @@ class getPostBy10_args(object):
         return not (self == other)
 all_structs.append(getPostBy10_args)
 getPostBy10_args.thrift_spec = (
+    None,  # 0
+    (1, TType.BOOL, 'for_lost_item', None, None, ),  # 1
 )
 
 
@@ -1204,7 +1234,7 @@ class getPostBy10_result(object):
                     self.success = []
                     (_etype3, _size0) = iprot.readListBegin()
                     for _i4 in range(_size0):
-                        _elem5 = PostInfo()
+                        _elem5 = AbbrInfo()
                         _elem5.read(iprot)
                         self.success.append(_elem5)
                     iprot.readListEnd()
@@ -1245,7 +1275,7 @@ class getPostBy10_result(object):
         return not (self == other)
 all_structs.append(getPostBy10_result)
 getPostBy10_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [PostInfo, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [AbbrInfo, None], False), None, ),  # 0
 )
 
 
@@ -1372,7 +1402,7 @@ class searchNext10_result(object):
                     self.success = []
                     (_etype10, _size7) = iprot.readListBegin()
                     for _i11 in range(_size7):
-                        _elem12 = PostInfo()
+                        _elem12 = AbbrInfo()
                         _elem12.read(iprot)
                         self.success.append(_elem12)
                     iprot.readListEnd()
@@ -1413,7 +1443,7 @@ class searchNext10_result(object):
         return not (self == other)
 all_structs.append(searchNext10_result)
 searchNext10_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [PostInfo, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [AbbrInfo, None], False), None, ),  # 0
 )
 
 
@@ -1540,7 +1570,7 @@ class searchPrev10_result(object):
                     self.success = []
                     (_etype17, _size14) = iprot.readListBegin()
                     for _i18 in range(_size14):
-                        _elem19 = PostInfo()
+                        _elem19 = AbbrInfo()
                         _elem19.read(iprot)
                         self.success.append(_elem19)
                     iprot.readListEnd()
@@ -1581,20 +1611,20 @@ class searchPrev10_result(object):
         return not (self == other)
 all_structs.append(searchPrev10_result)
 searchPrev10_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [PostInfo, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [AbbrInfo, None], False), None, ),  # 0
 )
 
 
-class uploadReply_args(object):
+class reqDetail_args(object):
     """
     Attributes:
-     - info
+     - req_info
 
     """
 
 
-    def __init__(self, info=None,):
-        self.info = info
+    def __init__(self, req_info=None,):
+        self.req_info = req_info
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1607,8 +1637,8 @@ class uploadReply_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.info = ReplyInfo()
-                    self.info.read(iprot)
+                    self.req_info = ReqInfo()
+                    self.req_info.read(iprot)
                 else:
                     iprot.skip(ftype)
             else:
@@ -1620,10 +1650,10 @@ class uploadReply_args(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('uploadReply_args')
-        if self.info is not None:
-            oprot.writeFieldBegin('info', TType.STRUCT, 1)
-            self.info.write(oprot)
+        oprot.writeStructBegin('reqDetail_args')
+        if self.req_info is not None:
+            oprot.writeFieldBegin('req_info', TType.STRUCT, 1)
+            self.req_info.write(oprot)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1641,14 +1671,139 @@ class uploadReply_args(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(uploadReply_args)
-uploadReply_args.thrift_spec = (
+all_structs.append(reqDetail_args)
+reqDetail_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'info', [ReplyInfo, None], None, ),  # 1
+    (1, TType.STRUCT, 'req_info', [ReqInfo, None], None, ),  # 1
 )
 
 
-class uploadReply_result(object):
+class reqDetail_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.STRUCT:
+                    self.success = DetailInfo()
+                    self.success.read(iprot)
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('reqDetail_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.STRUCT, 0)
+            self.success.write(oprot)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(reqDetail_result)
+reqDetail_result.thrift_spec = (
+    (0, TType.STRUCT, 'success', [DetailInfo, None], None, ),  # 0
+)
+
+
+class setUserInfo_args(object):
+    """
+    Attributes:
+     - set_user_info
+
+    """
+
+
+    def __init__(self, set_user_info=None,):
+        self.set_user_info = set_user_info
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRUCT:
+                    self.set_user_info = SetUserInfo()
+                    self.set_user_info.read(iprot)
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('setUserInfo_args')
+        if self.set_user_info is not None:
+            oprot.writeFieldBegin('set_user_info', TType.STRUCT, 1)
+            self.set_user_info.write(oprot)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(setUserInfo_args)
+setUserInfo_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRUCT, 'set_user_info', [SetUserInfo, None], None, ),  # 1
+)
+
+
+class setUserInfo_result(object):
     """
     Attributes:
      - success
@@ -1682,7 +1837,7 @@ class uploadReply_result(object):
         if oprot._fast_encode is not None and self.thrift_spec is not None:
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
-        oprot.writeStructBegin('uploadReply_result')
+        oprot.writeStructBegin('setUserInfo_result')
         if self.success is not None:
             oprot.writeFieldBegin('success', TType.BOOL, 0)
             oprot.writeBool(self.success)
@@ -1703,141 +1858,9 @@ class uploadReply_result(object):
 
     def __ne__(self, other):
         return not (self == other)
-all_structs.append(uploadReply_result)
-uploadReply_result.thrift_spec = (
+all_structs.append(setUserInfo_result)
+setUserInfo_result.thrift_spec = (
     (0, TType.BOOL, 'success', None, None, ),  # 0
-)
-
-
-class getAllReply_args(object):
-    """
-    Attributes:
-     - post_id
-
-    """
-
-
-    def __init__(self, post_id=None,):
-        self.post_id = post_id
-
-    def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
-            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
-            return
-        iprot.readStructBegin()
-        while True:
-            (fname, ftype, fid) = iprot.readFieldBegin()
-            if ftype == TType.STOP:
-                break
-            if fid == 1:
-                if ftype == TType.I32:
-                    self.post_id = iprot.readI32()
-                else:
-                    iprot.skip(ftype)
-            else:
-                iprot.skip(ftype)
-            iprot.readFieldEnd()
-        iprot.readStructEnd()
-
-    def write(self, oprot):
-        if oprot._fast_encode is not None and self.thrift_spec is not None:
-            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
-            return
-        oprot.writeStructBegin('getAllReply_args')
-        if self.post_id is not None:
-            oprot.writeFieldBegin('post_id', TType.I32, 1)
-            oprot.writeI32(self.post_id)
-            oprot.writeFieldEnd()
-        oprot.writeFieldStop()
-        oprot.writeStructEnd()
-
-    def validate(self):
-        return
-
-    def __repr__(self):
-        L = ['%s=%r' % (key, value)
-             for key, value in self.__dict__.items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-    def __ne__(self, other):
-        return not (self == other)
-all_structs.append(getAllReply_args)
-getAllReply_args.thrift_spec = (
-    None,  # 0
-    (1, TType.I32, 'post_id', None, None, ),  # 1
-)
-
-
-class getAllReply_result(object):
-    """
-    Attributes:
-     - success
-
-    """
-
-
-    def __init__(self, success=None,):
-        self.success = success
-
-    def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
-            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
-            return
-        iprot.readStructBegin()
-        while True:
-            (fname, ftype, fid) = iprot.readFieldBegin()
-            if ftype == TType.STOP:
-                break
-            if fid == 0:
-                if ftype == TType.LIST:
-                    self.success = []
-                    (_etype24, _size21) = iprot.readListBegin()
-                    for _i25 in range(_size21):
-                        _elem26 = ReplyInfo()
-                        _elem26.read(iprot)
-                        self.success.append(_elem26)
-                    iprot.readListEnd()
-                else:
-                    iprot.skip(ftype)
-            else:
-                iprot.skip(ftype)
-            iprot.readFieldEnd()
-        iprot.readStructEnd()
-
-    def write(self, oprot):
-        if oprot._fast_encode is not None and self.thrift_spec is not None:
-            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
-            return
-        oprot.writeStructBegin('getAllReply_result')
-        if self.success is not None:
-            oprot.writeFieldBegin('success', TType.LIST, 0)
-            oprot.writeListBegin(TType.STRUCT, len(self.success))
-            for iter27 in self.success:
-                iter27.write(oprot)
-            oprot.writeListEnd()
-            oprot.writeFieldEnd()
-        oprot.writeFieldStop()
-        oprot.writeStructEnd()
-
-    def validate(self):
-        return
-
-    def __repr__(self):
-        L = ['%s=%r' % (key, value)
-             for key, value in self.__dict__.items()]
-        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-    def __ne__(self, other):
-        return not (self == other)
-all_structs.append(getAllReply_result)
-getAllReply_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [ReplyInfo, None], False), None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs
