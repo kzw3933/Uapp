@@ -3,6 +3,7 @@ import pickle
 import jieba
 from zhon.hanzi import punctuation as hanzi_punc
 from string import punctuation as english_punc
+import csv
 
 class Searcher:
     def __init__(self):
@@ -74,21 +75,35 @@ class Searcher:
         for id in word_ids:
             if post_id not in lookup[id]:
                 lookup[id].append(post_id)
-        # print(self.lost_lookup[self.token2id['山地车']])
         self.save_table()
         self.update_config()
 
 
 if __name__ == '__main__':
-    data_path = r"/home/vhicr/Desktop/Uapp/utils/search/words"
-    files = os.listdir(data_path)
+    csv_data_path = r"/home/vhicr/Desktop/Uapp/utils/search/words/csv"
+    txt_data_path = r"/home/vhicr/Desktop/Uapp/utils/search/words/txt"
+    csv_files = os.listdir(csv_data_path)
+    txt_files = os.listdir(txt_data_path)
     id2token = {}
     token2id = {}
     lost_lookup = {}
     found_lookup = {}
     id = 0
-    for file in files:
-        with open(os.path.join(data_path, file), "r", encoding='utf-8') as f:
+    for file in csv_files:
+        with open(os.path.join(csv_data_path, file), "r", encoding='utf-8') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+            next(reader)
+            for row in reader:
+                token = row[0].strip()
+                if token and token not in token2id:
+                    token2id[token] = id
+                    id2token[id] = token
+                    lost_lookup[id] = []
+                    found_lookup[id] = []
+                    id = id + 1  
+                    
+    for file in txt_files:
+        with open(os.path.join(txt_data_path, file), "r", encoding='utf-8') as f:
             for line in f.readlines():
                 if line.strip('\n').strip():
                     token, *rest = line.split()
@@ -104,6 +119,6 @@ if __name__ == '__main__':
     with open(r"/home/vhicr/Desktop/Uapp/utils/search/words_table_a.pkl", "wb") as f:
         pickle.dump(table, f)
     searcher = Searcher()
-    print(searcher.lost_lookup[searcher.token2id['山地车']])
+    # print(searcher.lost_lookup[searcher.token2id['山地车']])
 
 

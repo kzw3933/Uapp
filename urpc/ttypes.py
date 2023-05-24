@@ -334,11 +334,12 @@ class PostInfo(object):
      - lost_time
      - item_desc
      - date
+     - contact
 
     """
 
 
-    def __init__(self, post_id=None, student_id=None, for_lost_item=None, thumbnail=None, item_image=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None,):
+    def __init__(self, post_id=None, student_id=None, for_lost_item=None, thumbnail=None, item_image=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None, contact=None,):
         self.post_id = post_id
         self.student_id = student_id
         self.for_lost_item = for_lost_item
@@ -351,6 +352,7 @@ class PostInfo(object):
         self.lost_time = lost_time
         self.item_desc = item_desc
         self.date = date
+        self.contact = contact
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -421,6 +423,11 @@ class PostInfo(object):
                     self.date = iprot.readI64()
                 else:
                     iprot.skip(ftype)
+            elif fid == 13:
+                if ftype == TType.STRING:
+                    self.contact = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -479,6 +486,10 @@ class PostInfo(object):
             oprot.writeFieldBegin('date', TType.I64, 12)
             oprot.writeI64(self.date)
             oprot.writeFieldEnd()
+        if self.contact is not None:
+            oprot.writeFieldBegin('contact', TType.STRING, 13)
+            oprot.writeString(self.contact.encode('utf-8') if sys.version_info[0] == 2 else self.contact)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -511,11 +522,12 @@ class AbbrInfo(object):
      - lost_time
      - item_desc
      - date
+     - contact
 
     """
 
 
-    def __init__(self, post_id=None, student_id=None, for_lost_item=None, thumbnail=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None,):
+    def __init__(self, post_id=None, student_id=None, for_lost_item=None, thumbnail=None, image_name=None, item_type=None, item_position=None, status=None, lost_time=None, item_desc="", date=None, contact=None,):
         self.post_id = post_id
         self.student_id = student_id
         self.for_lost_item = for_lost_item
@@ -527,6 +539,7 @@ class AbbrInfo(object):
         self.lost_time = lost_time
         self.item_desc = item_desc
         self.date = date
+        self.contact = contact
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -592,6 +605,11 @@ class AbbrInfo(object):
                     self.date = iprot.readI64()
                 else:
                     iprot.skip(ftype)
+            elif fid == 12:
+                if ftype == TType.STRING:
+                    self.contact = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -645,6 +663,10 @@ class AbbrInfo(object):
         if self.date is not None:
             oprot.writeFieldBegin('date', TType.I64, 11)
             oprot.writeI64(self.date)
+            oprot.writeFieldEnd()
+        if self.contact is not None:
+            oprot.writeFieldBegin('contact', TType.STRING, 12)
+            oprot.writeString(self.contact.encode('utf-8') if sys.version_info[0] == 2 else self.contact)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -829,6 +851,7 @@ PostInfo.thrift_spec = (
     (10, TType.I64, 'lost_time', None, None, ),  # 10
     (11, TType.STRING, 'item_desc', 'UTF8', "", ),  # 11
     (12, TType.I64, 'date', None, None, ),  # 12
+    (13, TType.STRING, 'contact', 'UTF8', None, ),  # 13
 )
 all_structs.append(AbbrInfo)
 AbbrInfo.thrift_spec = (
@@ -844,6 +867,7 @@ AbbrInfo.thrift_spec = (
     (9, TType.I64, 'lost_time', None, None, ),  # 9
     (10, TType.STRING, 'item_desc', 'UTF8', "", ),  # 10
     (11, TType.I64, 'date', None, None, ),  # 11
+    (12, TType.STRING, 'contact', 'UTF8', None, ),  # 12
 )
 all_structs.append(ReqInfo)
 ReqInfo.thrift_spec = (
