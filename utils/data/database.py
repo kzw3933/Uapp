@@ -26,6 +26,7 @@ class DB:
 
     # 插入用户数据
     def insert_user(self, student_id, username, email, password, contact):
+        self.connect()
         cursor = self.conn.cursor()
         sql = "INSERT INTO User(StudentID, Username, Email, Password, Contact) VALUES (%s, %s, %s, %s, %s)"
         try:
@@ -38,9 +39,11 @@ class DB:
             return False
         finally:
             cursor.close()
+            self.close()
 
     # 查询用户数据
     def query_user(self, student_id):
+        self.connect()
         cursor = self.conn.cursor()
         sql = "SELECT * FROM User WHERE StudentID=%s"
         try:
@@ -52,9 +55,11 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
 
     # 更新用户数据
     def update_user(self, student_id, username, email, password, contact):
+        self.connect()
         cursor = self.conn.cursor()
         sql = "UPDATE User SET Username=%s, Email=%s, Password=%s, Contact=%s WHERE StudentID=%s"
         try:
@@ -67,9 +72,11 @@ class DB:
             return False
         finally:
             cursor.close()
+            self.close()
 
     # 删除用户数据
     def delete_user(self, student_id):
+        self.connect()
         cursor = self.conn.cursor()
         sql = "DELETE FROM User WHERE StudentID=%s"
         try:
@@ -82,9 +89,11 @@ class DB:
             return False
         finally:
             cursor.close()
+            self.close()
 
     # 插入物品数据
     def insert_item(self, item_time, item_type, item_img_name, item_location, item_description):
+        self.connect()
         cursor = self.conn.cursor()
         sql = "INSERT INTO Item(ItemTime, ItemType, ItemImgName, ItemLocation, ItemDescription) VALUES (%s, %s, %s, %s, %s)"
         try:
@@ -97,9 +106,11 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
 
     # 插入帖子数据
     def insert_post(self, post_id, student_id, item_id, is_for_lost, available, post_date, contact):
+        self.connect()
         post = "LostPost" if is_for_lost else "FoundPost"
         cursor = self.conn.cursor()
         sql = f"INSERT INTO {post}(PostID, StudentID, ItemID, Available, PostTime, Contact) VALUES (%s, %s, %s, %s, %s, %s)"
@@ -113,9 +124,11 @@ class DB:
             return None
         finally:
             cursor.close() 
+            self.close()
             
     # 更新帖子状态
     def update_post(self, post_id, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = "UPDATE LostPost SET Available=False WHERE PostID=%s"
@@ -131,9 +144,11 @@ class DB:
             return False
         finally:
             cursor.close() 
+            self.close()
 
     # 查询帖子数据
     def query_post_by10(self, is_for_lost):
+        self.connect()
         if is_for_lost:
             sql = "SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
@@ -154,8 +169,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
             
     def query_post_by_ids(self, related_ids, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if len(related_ids) == 1:      
             if is_for_lost:
@@ -187,8 +204,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
             
     def query_post_by_id(self, related_id, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -207,8 +226,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
             
     def query_next_post_by10(self, last_id, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -227,8 +248,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
     
     def query_prev_post_by10(self, last_id, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -247,8 +270,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
             
     def query_history_posts_of_user(self, user_id, is_for_lost):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -267,8 +292,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
 
     def query_next_post_by10_of_user(self, last_id, is_for_lost, user_id):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -287,8 +314,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
     
     def query_prev_post_by10_of_user(self, last_id, is_for_lost, user_id):
+        self.connect()
         cursor = self.conn.cursor()
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
@@ -307,8 +336,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
 
     def query_post_by10_of_user(self, is_for_lost, user_id):
+        self.connect()
         if is_for_lost:
             sql = "SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
@@ -329,8 +360,10 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()
             
     def query_post_by_ids_of_user(self, related_ids, is_for_lost, user_id):
+        self.connect()
         cursor = self.conn.cursor()
         if len(related_ids) == 1:      
             if is_for_lost:
@@ -362,3 +395,4 @@ class DB:
             return None
         finally:
             cursor.close()
+            self.close()

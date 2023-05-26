@@ -68,3 +68,44 @@
 2023-05-24 19:50:47,168 - ERROR - Query user error:(0, '')
 2023-05-24 20:02:30,145 - INFO - Success on mysql database initialize
 2023-05-24 20:02:30,407 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-24 21:50:38,197 - INFO - Success on mysql database initialize
+2023-05-24 21:50:38,485 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-24 21:55:37,072 - INFO - Success on mysql database initialize
+2023-05-24 21:55:37,539 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-24 22:01:55,760 - ERROR - Query user error:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+2023-05-24 22:02:10,989 - INFO - User vhicr register successful
+2023-05-24 22:02:31,538 - INFO - User dbjdj register successful
+2023-05-25 11:23:44,684 - ERROR - Query post error:(2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
+2023-05-25 11:23:46,585 - ERROR - Query post error:(0, '')
+2023-05-25 11:23:49,643 - ERROR - Query post error:(0, '')
+2023-05-25 11:23:52,575 - ERROR - Query post error:(0, '')
+2023-05-25 11:24:08,407 - ERROR - Insert item error:(0, '')
+2023-05-25 11:24:09,527 - ERROR - Insert item error:(0, '')
+2023-05-25 11:24:10,448 - ERROR - Insert item error:(0, '')
+2023-05-25 11:24:11,406 - ERROR - Insert item error:(0, '')
+2023-05-25 11:24:12,062 - ERROR - Insert item error:(0, '')
+2023-05-25 11:47:37,651 - ERROR - Query post error:(0, '')
+2023-05-25 11:47:38,737 - ERROR - Query post error:(0, '')
+2023-05-25 11:47:39,807 - ERROR - Query post error:(0, '')
+2023-05-25 11:47:46,400 - ERROR - Query post error:(0, '')
+2023-05-25 12:19:44,495 - ERROR - Query post error:(0, '')
+2023-05-25 12:20:01,762 - ERROR - Query post error:(0, '')
+2023-05-25 12:20:35,606 - ERROR - Query post error:(0, '')
+2023-05-25 17:41:40,362 - ERROR - Query post error:(0, '')
+2023-05-25 22:46:35,527 - INFO - Success on mysql database initialize
+2023-05-25 22:46:35,814 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-26 08:05:33,171 - ERROR - Query post error:(2013, 'Lost connection to MySQL server during query')
+2023-05-26 11:20:30,087 - INFO - Success on mysql database initialize
+2023-05-26 11:20:30,372 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-26 12:33:25,040 - ERROR - Insert post error:(0, '')
+2023-05-26 12:33:57,640 - ERROR - Insert post error:(0, '')
+2023-05-26 12:36:14,621 - INFO - User hshsjs register successful
+2023-05-26 12:36:19,596 - INFO - User with student_id jzjsj login succeed
+2023-05-26 12:36:19,610 - INFO - User with student_id jzjsj get his or her user-information successfully
+2023-05-26 12:36:39,755 - ERROR - Insert post error:(0, '')
+2023-05-26 12:36:46,389 - ERROR - Insert post error:(0, '')
+2023-05-26 12:37:10,975 - ERROR - Update user error:(0, '')
+2023-05-26 12:40:52,514 - INFO - Success on mysql database initialize
+2023-05-26 12:40:52,805 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
+2023-05-26 12:41:52,772 - INFO - User with student_id jzjsj upload a post successfully
+2023-05-26 12:42:21,850 - INFO - User with student_id jzjsj upload a post successfully

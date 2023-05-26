@@ -25,6 +25,7 @@ class UappService(UService.Iface):
 
 
     def login(self, info):
+        
         column = DBSERVER.query_user(info.student_id)
         password = column[3]
 
@@ -36,7 +37,7 @@ class UappService(UService.Iface):
             return False
 
     def getUserInfo(self, student_id):
-
+        
         column = DBSERVER.query_user(student_id)
         if column:
             try:
@@ -54,6 +55,7 @@ class UappService(UService.Iface):
 
 
     def uploadPost(self, info):
+        
         student_id = info.student_id
         
         full_img_data = BytesIO(info.item_image)
@@ -109,10 +111,12 @@ class UappService(UService.Iface):
     
     
     def getPostBy10(self, for_lost_item):
+        
         columns = DBSERVER.query_post_by10(for_lost_item)
         return self.help_get_thumb_posts(columns, for_lost_item)
     
     def searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
+        
         if searchEnable:
             related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
             if post_id.strip():
@@ -133,6 +137,7 @@ class UappService(UService.Iface):
             
     
     def searchPrev10(self, searchText, post_id, searchEnable, for_lost_item):
+        
         if searchEnable:
             related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
             if post_id.strip():
@@ -151,12 +156,13 @@ class UappService(UService.Iface):
         return self.help_get_thumb_posts(columns, for_lost_item)
     
     def reqDetail(self, req_info):
+        
         column = DBSERVER.query_post_by_id(req_info.post_id, req_info.for_lost_item)
         return self.help_get_full_post(column)
     
     
     def setUserInfo(self, set_user_info):
-        print(set_user_info)
+        
         student_id = set_user_info.student_id
         res = False
         column = DBSERVER.query_user(student_id)
@@ -183,13 +189,16 @@ class UappService(UService.Iface):
         return res
     
     def setPostInfoFound(self, post_id, for_lost_item):
+        
         return DBSERVER.update_post(post_id, for_lost_item)
     
     def getAllPostHistory(self, student_id, for_lost_item):
+        
         columns = DBSERVER.query_history_posts_of_user(student_id, for_lost_item)
         return self.help_get_thumb_posts(columns, for_lost_item)
     
     def historyNext10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        
         if searchEnable:
             related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
             if post_id.strip():
@@ -209,6 +218,7 @@ class UappService(UService.Iface):
         
         
     def historyPrev10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        
         if searchEnable:
             related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
             if post_id.strip():
