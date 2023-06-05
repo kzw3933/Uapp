@@ -2,7 +2,7 @@ import utils.log.logger as logger
 import utils.data.database
 import utils.search.searcher
 
-SERVER_IP = "210.45.112.121"
+SERVER_IP = "222.195.72.45"
 SERVER_PORT = 7860
 
 ITEMS_FULL_IMG_ROOT = "/home/vhicr/Desktop/Uapp/imgs/items/full/"

@@ -9,8 +9,6 @@ from myservice import UappService
 
 if __name__ == '__main__':
 
-    DBSERVER.connect()
-
     # 创建服务处理器
     handler = UappService()
     handler.bindLogger(LOGGER)

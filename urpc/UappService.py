@@ -97,6 +97,47 @@ class Iface(object):
         """
         pass
 
+    def setPostInfoFound(self, post_id, for_lost_item):
+        """
+        Parameters:
+         - post_id
+         - for_lost_item
+
+        """
+        pass
+
+    def historyNext10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        """
+        Parameters:
+         - searchText
+         - post_id
+         - searchEnable
+         - for_lost_item
+         - poster_id
+
+        """
+        pass
+
+    def historyPrev10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        """
+        Parameters:
+         - searchText
+         - post_id
+         - searchEnable
+         - for_lost_item
+         - poster_id
+
+        """
+        pass
+
+    def uploadWords(self, words):
+        """
+        Parameters:
+         - words
+
+        """
+        pass
+
 
 class Client(Iface):
     def __init__(self, iprot, oprot=None):
@@ -405,6 +446,152 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "setUserInfo failed: unknown result")
 
+    def setPostInfoFound(self, post_id, for_lost_item):
+        """
+        Parameters:
+         - post_id
+         - for_lost_item
+
+        """
+        self.send_setPostInfoFound(post_id, for_lost_item)
+        return self.recv_setPostInfoFound()
+
+    def send_setPostInfoFound(self, post_id, for_lost_item):
+        self._oprot.writeMessageBegin('setPostInfoFound', TMessageType.CALL, self._seqid)
+        args = setPostInfoFound_args()
+        args.post_id = post_id
+        args.for_lost_item = for_lost_item
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_setPostInfoFound(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = setPostInfoFound_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "setPostInfoFound failed: unknown result")
+
+    def historyNext10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        """
+        Parameters:
+         - searchText
+         - post_id
+         - searchEnable
+         - for_lost_item
+         - poster_id
+
+        """
+        self.send_historyNext10(searchText, post_id, searchEnable, for_lost_item, poster_id)
+        return self.recv_historyNext10()
+
+    def send_historyNext10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        self._oprot.writeMessageBegin('historyNext10', TMessageType.CALL, self._seqid)
+        args = historyNext10_args()
+        args.searchText = searchText
+        args.post_id = post_id
+        args.searchEnable = searchEnable
+        args.for_lost_item = for_lost_item
+        args.poster_id = poster_id
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_historyNext10(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = historyNext10_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "historyNext10 failed: unknown result")
+
+    def historyPrev10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        """
+        Parameters:
+         - searchText
+         - post_id
+         - searchEnable
+         - for_lost_item
+         - poster_id
+
+        """
+        self.send_historyPrev10(searchText, post_id, searchEnable, for_lost_item, poster_id)
+        return self.recv_historyPrev10()
+
+    def send_historyPrev10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
+        self._oprot.writeMessageBegin('historyPrev10', TMessageType.CALL, self._seqid)
+        args = historyPrev10_args()
+        args.searchText = searchText
+        args.post_id = post_id
+        args.searchEnable = searchEnable
+        args.for_lost_item = for_lost_item
+        args.poster_id = poster_id
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_historyPrev10(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = historyPrev10_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "historyPrev10 failed: unknown result")
+
+    def uploadWords(self, words):
+        """
+        Parameters:
+         - words
+
+        """
+        self.send_uploadWords(words)
+        return self.recv_uploadWords()
+
+    def send_uploadWords(self, words):
+        self._oprot.writeMessageBegin('uploadWords', TMessageType.CALL, self._seqid)
+        args = uploadWords_args()
+        args.words = words
+        args.write(self._oprot)
+        self._oprot.writeMessageEnd()
+        self._oprot.trans.flush()
+
+    def recv_uploadWords(self):
+        iprot = self._iprot
+        (fname, mtype, rseqid) = iprot.readMessageBegin()
+        if mtype == TMessageType.EXCEPTION:
+            x = TApplicationException()
+            x.read(iprot)
+            iprot.readMessageEnd()
+            raise x
+        result = uploadWords_result()
+        result.read(iprot)
+        iprot.readMessageEnd()
+        if result.success is not None:
+            return result.success
+        raise TApplicationException(TApplicationException.MISSING_RESULT, "uploadWords failed: unknown result")
+
 
 class Processor(Iface, TProcessor):
     def __init__(self, handler):
@@ -419,6 +606,10 @@ class Processor(Iface, TProcessor):
         self._processMap["searchPrev10"] = Processor.process_searchPrev10
         self._processMap["reqDetail"] = Processor.process_reqDetail
         self._processMap["setUserInfo"] = Processor.process_setUserInfo
+        self._processMap["setPostInfoFound"] = Processor.process_setPostInfoFound
+        self._processMap["historyNext10"] = Processor.process_historyNext10
+        self._processMap["historyPrev10"] = Processor.process_historyPrev10
+        self._processMap["uploadWords"] = Processor.process_uploadWords
         self._on_message_begin = None
 
     def on_message_begin(self, func):
@@ -644,6 +835,98 @@ class Processor(Iface, TProcessor):
             msg_type = TMessageType.EXCEPTION
             result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
         oprot.writeMessageBegin("setUserInfo", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_setPostInfoFound(self, seqid, iprot, oprot):
+        args = setPostInfoFound_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = setPostInfoFound_result()
+        try:
+            result.success = self._handler.setPostInfoFound(args.post_id, args.for_lost_item)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("setPostInfoFound", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_historyNext10(self, seqid, iprot, oprot):
+        args = historyNext10_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = historyNext10_result()
+        try:
+            result.success = self._handler.historyNext10(args.searchText, args.post_id, args.searchEnable, args.for_lost_item, args.poster_id)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("historyNext10", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_historyPrev10(self, seqid, iprot, oprot):
+        args = historyPrev10_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = historyPrev10_result()
+        try:
+            result.success = self._handler.historyPrev10(args.searchText, args.post_id, args.searchEnable, args.for_lost_item, args.poster_id)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("historyPrev10", msg_type, seqid)
+        result.write(oprot)
+        oprot.writeMessageEnd()
+        oprot.trans.flush()
+
+    def process_uploadWords(self, seqid, iprot, oprot):
+        args = uploadWords_args()
+        args.read(iprot)
+        iprot.readMessageEnd()
+        result = uploadWords_result()
+        try:
+            result.success = self._handler.uploadWords(args.words)
+            msg_type = TMessageType.REPLY
+        except TTransport.TTransportException:
+            raise
+        except TApplicationException as ex:
+            logging.exception('TApplication exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = ex
+        except Exception:
+            logging.exception('Unexpected exception in handler')
+            msg_type = TMessageType.EXCEPTION
+            result = TApplicationException(TApplicationException.INTERNAL_ERROR, 'Internal error')
+        oprot.writeMessageBegin("uploadWords", msg_type, seqid)
         result.write(oprot)
         oprot.writeMessageEnd()
         oprot.trans.flush()
@@ -1860,6 +2143,632 @@ class setUserInfo_result(object):
         return not (self == other)
 all_structs.append(setUserInfo_result)
 setUserInfo_result.thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ),  # 0
+)
+
+
+class setPostInfoFound_args(object):
+    """
+    Attributes:
+     - post_id
+     - for_lost_item
+
+    """
+
+
+    def __init__(self, post_id=None, for_lost_item=None,):
+        self.post_id = post_id
+        self.for_lost_item = for_lost_item
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.post_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('setPostInfoFound_args')
+        if self.post_id is not None:
+            oprot.writeFieldBegin('post_id', TType.STRING, 1)
+            oprot.writeString(self.post_id.encode('utf-8') if sys.version_info[0] == 2 else self.post_id)
+            oprot.writeFieldEnd()
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 2)
+            oprot.writeBool(self.for_lost_item)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(setPostInfoFound_args)
+setPostInfoFound_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'post_id', 'UTF8', None, ),  # 1
+    (2, TType.BOOL, 'for_lost_item', None, None, ),  # 2
+)
+
+
+class setPostInfoFound_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.BOOL:
+                    self.success = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('setPostInfoFound_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.BOOL, 0)
+            oprot.writeBool(self.success)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(setPostInfoFound_result)
+setPostInfoFound_result.thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ),  # 0
+)
+
+
+class historyNext10_args(object):
+    """
+    Attributes:
+     - searchText
+     - post_id
+     - searchEnable
+     - for_lost_item
+     - poster_id
+
+    """
+
+
+    def __init__(self, searchText=None, post_id=None, searchEnable=None, for_lost_item=None, poster_id=None,):
+        self.searchText = searchText
+        self.post_id = post_id
+        self.searchEnable = searchEnable
+        self.for_lost_item = for_lost_item
+        self.poster_id = poster_id
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.searchText = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.post_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.BOOL:
+                    self.searchEnable = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.poster_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('historyNext10_args')
+        if self.searchText is not None:
+            oprot.writeFieldBegin('searchText', TType.STRING, 1)
+            oprot.writeString(self.searchText.encode('utf-8') if sys.version_info[0] == 2 else self.searchText)
+            oprot.writeFieldEnd()
+        if self.post_id is not None:
+            oprot.writeFieldBegin('post_id', TType.STRING, 2)
+            oprot.writeString(self.post_id.encode('utf-8') if sys.version_info[0] == 2 else self.post_id)
+            oprot.writeFieldEnd()
+        if self.searchEnable is not None:
+            oprot.writeFieldBegin('searchEnable', TType.BOOL, 3)
+            oprot.writeBool(self.searchEnable)
+            oprot.writeFieldEnd()
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 4)
+            oprot.writeBool(self.for_lost_item)
+            oprot.writeFieldEnd()
+        if self.poster_id is not None:
+            oprot.writeFieldBegin('poster_id', TType.STRING, 5)
+            oprot.writeString(self.poster_id.encode('utf-8') if sys.version_info[0] == 2 else self.poster_id)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(historyNext10_args)
+historyNext10_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'searchText', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'post_id', 'UTF8', None, ),  # 2
+    (3, TType.BOOL, 'searchEnable', None, None, ),  # 3
+    (4, TType.BOOL, 'for_lost_item', None, None, ),  # 4
+    (5, TType.STRING, 'poster_id', 'UTF8', None, ),  # 5
+)
+
+
+class historyNext10_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype24, _size21) = iprot.readListBegin()
+                    for _i25 in range(_size21):
+                        _elem26 = AbbrInfo()
+                        _elem26.read(iprot)
+                        self.success.append(_elem26)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('historyNext10_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.STRUCT, len(self.success))
+            for iter27 in self.success:
+                iter27.write(oprot)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(historyNext10_result)
+historyNext10_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.STRUCT, [AbbrInfo, None], False), None, ),  # 0
+)
+
+
+class historyPrev10_args(object):
+    """
+    Attributes:
+     - searchText
+     - post_id
+     - searchEnable
+     - for_lost_item
+     - poster_id
+
+    """
+
+
+    def __init__(self, searchText=None, post_id=None, searchEnable=None, for_lost_item=None, poster_id=None,):
+        self.searchText = searchText
+        self.post_id = post_id
+        self.searchEnable = searchEnable
+        self.for_lost_item = for_lost_item
+        self.poster_id = poster_id
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.searchText = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.post_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.BOOL:
+                    self.searchEnable = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.BOOL:
+                    self.for_lost_item = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.poster_id = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('historyPrev10_args')
+        if self.searchText is not None:
+            oprot.writeFieldBegin('searchText', TType.STRING, 1)
+            oprot.writeString(self.searchText.encode('utf-8') if sys.version_info[0] == 2 else self.searchText)
+            oprot.writeFieldEnd()
+        if self.post_id is not None:
+            oprot.writeFieldBegin('post_id', TType.STRING, 2)
+            oprot.writeString(self.post_id.encode('utf-8') if sys.version_info[0] == 2 else self.post_id)
+            oprot.writeFieldEnd()
+        if self.searchEnable is not None:
+            oprot.writeFieldBegin('searchEnable', TType.BOOL, 3)
+            oprot.writeBool(self.searchEnable)
+            oprot.writeFieldEnd()
+        if self.for_lost_item is not None:
+            oprot.writeFieldBegin('for_lost_item', TType.BOOL, 4)
+            oprot.writeBool(self.for_lost_item)
+            oprot.writeFieldEnd()
+        if self.poster_id is not None:
+            oprot.writeFieldBegin('poster_id', TType.STRING, 5)
+            oprot.writeString(self.poster_id.encode('utf-8') if sys.version_info[0] == 2 else self.poster_id)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(historyPrev10_args)
+historyPrev10_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'searchText', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'post_id', 'UTF8', None, ),  # 2
+    (3, TType.BOOL, 'searchEnable', None, None, ),  # 3
+    (4, TType.BOOL, 'for_lost_item', None, None, ),  # 4
+    (5, TType.STRING, 'poster_id', 'UTF8', None, ),  # 5
+)
+
+
+class historyPrev10_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.LIST:
+                    self.success = []
+                    (_etype31, _size28) = iprot.readListBegin()
+                    for _i32 in range(_size28):
+                        _elem33 = AbbrInfo()
+                        _elem33.read(iprot)
+                        self.success.append(_elem33)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('historyPrev10_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.LIST, 0)
+            oprot.writeListBegin(TType.STRUCT, len(self.success))
+            for iter34 in self.success:
+                iter34.write(oprot)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(historyPrev10_result)
+historyPrev10_result.thrift_spec = (
+    (0, TType.LIST, 'success', (TType.STRUCT, [AbbrInfo, None], False), None, ),  # 0
+)
+
+
+class uploadWords_args(object):
+    """
+    Attributes:
+     - words
+
+    """
+
+
+    def __init__(self, words=None,):
+        self.words = words
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 1:
+                if ftype == TType.LIST:
+                    self.words = []
+                    (_etype38, _size35) = iprot.readListBegin()
+                    for _i39 in range(_size35):
+                        _elem40 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.words.append(_elem40)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('uploadWords_args')
+        if self.words is not None:
+            oprot.writeFieldBegin('words', TType.LIST, 1)
+            oprot.writeListBegin(TType.STRING, len(self.words))
+            for iter41 in self.words:
+                oprot.writeString(iter41.encode('utf-8') if sys.version_info[0] == 2 else iter41)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(uploadWords_args)
+uploadWords_args.thrift_spec = (
+    None,  # 0
+    (1, TType.LIST, 'words', (TType.STRING, 'UTF8', False), None, ),  # 1
+)
+
+
+class uploadWords_result(object):
+    """
+    Attributes:
+     - success
+
+    """
+
+
+    def __init__(self, success=None,):
+        self.success = success
+
+    def read(self, iprot):
+        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+            iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
+            return
+        iprot.readStructBegin()
+        while True:
+            (fname, ftype, fid) = iprot.readFieldBegin()
+            if ftype == TType.STOP:
+                break
+            if fid == 0:
+                if ftype == TType.BOOL:
+                    self.success = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            else:
+                iprot.skip(ftype)
+            iprot.readFieldEnd()
+        iprot.readStructEnd()
+
+    def write(self, oprot):
+        if oprot._fast_encode is not None and self.thrift_spec is not None:
+            oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
+            return
+        oprot.writeStructBegin('uploadWords_result')
+        if self.success is not None:
+            oprot.writeFieldBegin('success', TType.BOOL, 0)
+            oprot.writeBool(self.success)
+            oprot.writeFieldEnd()
+        oprot.writeFieldStop()
+        oprot.writeStructEnd()
+
+    def validate(self):
+        return
+
+    def __repr__(self):
+        L = ['%s=%r' % (key, value)
+             for key, value in self.__dict__.items()]
+        return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not (self == other)
+all_structs.append(uploadWords_result)
+uploadWords_result.thrift_spec = (
     (0, TType.BOOL, 'success', None, None, ),  # 0
 )
 fix_spec(all_structs)
