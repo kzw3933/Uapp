@@ -118,7 +118,7 @@ class UappService(UService.Iface):
     def searchNext10(self, searchText, post_id, searchEnable, for_lost_item):
         
         if searchEnable:
-            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
+            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item, True)
             if post_id.strip():
                 related_post_ids = related_post_ids[related_post_ids.index(post_id)+1:]
             if len(related_post_ids) > 10:
@@ -139,7 +139,7 @@ class UappService(UService.Iface):
     def searchPrev10(self, searchText, post_id, searchEnable, for_lost_item):
         
         if searchEnable:
-            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
+            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item, True)
             if post_id.strip():
                 related_post_ids = related_post_ids[:related_post_ids.index(post_id)]
             if len(related_post_ids) > 10:
@@ -200,7 +200,7 @@ class UappService(UService.Iface):
     def historyNext10(self, searchText, post_id, searchEnable, for_lost_item, poster_id):
         
         if searchEnable:
-            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item)
+            related_post_ids = self.searcher.get_related_post_ids(searchText, for_lost_item, True)
             if post_id.strip():
                 related_post_ids = related_post_ids[related_post_ids.index(post_id)+1:]
             if len(related_post_ids) > 10:
@@ -235,6 +235,10 @@ class UappService(UService.Iface):
                 columns = DBSERVER.query_post_by10_of_user(for_lost_item, poster_id)
             
         return self.help_get_thumb_posts(columns, for_lost_item)
+
+    def uploadWords(self, words):
+        self.searcher.expand_dictionary_by_words(words)
+        return True
         
             
 

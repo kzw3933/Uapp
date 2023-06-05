@@ -30,7 +30,7 @@ class Searcher:
 
         return ret
 
-    def get_related_post_ids(self, searchText, is_for_lost):
+    def get_related_post_ids(self, searchText, is_for_lost, enable_vague=False):
         lookup = self.lost_lookup if is_for_lost else self.found_lookup 
         words = []
         if searchText.strip():
@@ -38,19 +38,50 @@ class Searcher:
             words = [' ' if i.strip() in self.punctuation else i.strip() for i in words]
             words = [i.strip() for i in words if i.strip()]
         word_ids = []
-        for word in words:
-            if word in self.token2id:
-                word_ids.append(self.token2id[word])
+        if enable_vague:
+            for token in self.token2id:
+                for word in words:
+                    if word in token:
+                        word_ids.append(self.token2id[token])
+        else:
+            for word in words:
+                if word in self.token2id:
+                    word_ids.append(self.token2id[word])
         res = {}
-        for id in word_ids:
-            for i in lookup[id]:
+        for wid in word_ids:
+            for i in lookup[wid]:
                 if i not in res:
                     res[i] = 1
                 else:
                     res[i] += 1
-        sorted_res = dict(sorted(res.items(), key = lambda x: x[1], reverse = True))
+        sorted_res = dict(sorted(res.items(), key = lambda x: x[1], reverse=True))
         
         return list(sorted_res.keys())
+
+    def expand_dictionary_by_words(self, tokens_list):
+        id = len(self.id2token)
+        for token in tokens_list:
+            token = token.strip()
+            if token and token not in self.token2id:
+                self.token2id[token] = id
+                self.id2token[id] = token
+                self.lost_lookup[id] = []
+                self.found_lookup[id] = []
+                id = id + 1
+    
+    def expand_dictionary_by_file(self, words_list_file):
+        id = len(self.id2token)
+        with open(words_list_file, "r", encoding='utf-8') as f:
+            for line in f.readlines():
+                if line.strip('\n').strip():
+                    token, *rest = line.split()
+                    token = token.strip()
+                    if token and token not in self.token2id:
+                        self.token2id[token] = id
+                        self.id2token[id] = token
+                        self.lost_lookup[id] = []
+                        self.found_lookup[id] = []
+                        id = id + 1
 
     def update_config(self):
         with open(self.config_file, "w") as f:
@@ -118,7 +149,10 @@ if __name__ == '__main__':
     table = (id2token, token2id, lost_lookup, found_lookup)
     with open(r"/home/vhicr/Desktop/Uapp/utils/search/words_table_a.pkl", "wb") as f:
         pickle.dump(table, f)
-    searcher = Searcher()
+    # searcher = Searcher()
+    # searcher.expand_dictionary_by_file('/home/vhicr/Desktop/Uapp/utils/search/words/txt/123.txt')
+    # searcher.save_table()
+    # searcher.update_config()
     # print(searcher.lost_lookup[searcher.token2id['山地车']])
 
 

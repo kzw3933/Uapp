@@ -152,11 +152,11 @@ class DB:
         if is_for_lost:
             sql = "SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        AND LostPost.Available = True ORDER BY PostTime LIMIT 10"
+        AND LostPost.Available = True ORDER BY PostTime DESC LIMIT 10"
         else:
             sql = "SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime, FoundPost.Contact FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        AND FoundPost.Available = True ORDER BY PostTime LIMIT 10"
+        AND FoundPost.Available = True ORDER BY PostTime DESC LIMIT 10"
         
         cursor = self.conn.cursor()
         
@@ -178,20 +178,20 @@ class DB:
             if is_for_lost:
                 sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID \
-                AND LostPost.Available = True AND PostID = %s ORDER BY PostTime"
+                AND LostPost.Available = True AND PostID = %s"
             else:
                 sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime, FoundPost.Contact FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID \
-                AND FoundPost.Available = True AND PostID = %s  ORDER BY PostTime"
+                AND FoundPost.Available = True AND PostID = %s"
         else:
             if is_for_lost:
                 sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID \
-                AND LostPost.Available = True AND PostID IN {tuple(related_ids)} ORDER BY PostTime"
+                AND LostPost.Available = True AND PostID IN {tuple(related_ids)}"
             else:
                 sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime, FoundPost.Contact FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID \
-                AND FoundPost.Available = True AND PostID IN {tuple(related_ids)} ORDER BY PostTime"
+                AND FoundPost.Available = True AND PostID IN {tuple(related_ids)}"
         try:
             if len(related_ids) == 1: 
                 cursor.execute(sql, related_ids[0])
@@ -234,11 +234,11 @@ class DB:
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        AND LostPost.Available = True AND LostPost.PostTime > (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND LostPost.Available = True AND LostPost.PostTime > (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         else:
             sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        AND FoundPost.Available = True AND FoundPost.PostTime > (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND FoundPost.Available = True AND FoundPost.PostTime > (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         try:
             cursor.execute(sql, last_id)
             result = cursor.fetchall()
@@ -256,11 +256,11 @@ class DB:
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        AND LostPost.Available = True AND LostPost.PostTime < (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND LostPost.Available = True AND LostPost.PostTime < (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         else:
             sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        AND FoundPost.Available = True AND FoundPost.PostTime < (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND FoundPost.Available = True AND FoundPost.PostTime < (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         try:
             cursor.execute(sql, last_id)
             result = cursor.fetchall()
@@ -278,11 +278,11 @@ class DB:
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        WHERE LostPost.StudentID={user_id}"
+        WHERE LostPost.StudentID={user_id} ORDER BY PostTime DESC"
         else:
             sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        WHERE LostPost.StudentID={user_id}"
+        WHERE LostPost.StudentID={user_id} ORDER BY PostTime DESC"
         try:
             cursor.execute(sql)
             result = cursor.fetchall()
@@ -300,11 +300,11 @@ class DB:
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        AND LostPost.StudentID = {user_id} AND LostPost.PostTime > (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND LostPost.StudentID = {user_id} AND LostPost.PostTime > (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         else:
             sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        AND FoundPost.StudentID = {user_id} AND FoundPost.PostTime > (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND FoundPost.StudentID = {user_id} AND FoundPost.PostTime > (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         try:
             cursor.execute(sql, last_id)
             result = cursor.fetchall()
@@ -322,11 +322,11 @@ class DB:
         if is_for_lost:
             sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID\
-        AND LostPost.StudentID = {user_id} AND LostPost.PostTime < (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND LostPost.StudentID = {user_id} AND LostPost.PostTime < (SELECT PostTime FROM LostPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         else:
             sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
         FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID\
-        AND FoundPost.StudentID = {user_id} AND FoundPost.PostTime < (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime LIMIT 10"
+        AND FoundPost.StudentID = {user_id} AND FoundPost.PostTime < (SELECT PostTime FROM FoundPost WHERE PostID = %s) ORDER BY PostTime DESC LIMIT 10"
         try:
             cursor.execute(sql, last_id)
             result = cursor.fetchall()
@@ -369,20 +369,20 @@ class DB:
             if is_for_lost:
                 sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID \
-                AND LostPost.StudentID = {user_id} PostID = %s ORDER BY PostTime"
+                AND LostPost.StudentID = {user_id} PostID = %s ORDER BY PostTime DESC"
             else:
                 sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime, FoundPost.Contact FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID \
-                AND FoundPost.StudentID = {user_id} AND PostID = %s  ORDER BY PostTime"
+                AND FoundPost.StudentID = {user_id} AND PostID = %s  ORDER BY PostTime DESC"
         else:
             if is_for_lost:
                 sql = f"SELECT LostPost.PostID, LostPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 LostPost.Available, Item.ItemTime, Item.ItemDescription, LostPost.PostTime, LostPost.Contact FROM LostPost, Item WHERE LostPost.ItemID=Item.ItemID \
-                AND LostPost.StudentID = {user_id} AND PostID IN {tuple(related_ids)} ORDER BY PostTime"
+                AND LostPost.StudentID = {user_id} AND PostID IN {tuple(related_ids)} ORDER BY PostTime DESC"
             else:
                 sql = f"SELECT FoundPost.PostID, FoundPost.StudentID, Item.ItemImgName, Item.ItemType, Item.ItemLocation,\
                 FoundPost.Available, Item.ItemTime, Item.ItemDescription, FoundPost.PostTime, FoundPost.Contact FROM FoundPost, Item WHERE FoundPost.ItemID=Item.ItemID \
-                AND FoundPost.StudentID = {user_id} AND PostID IN {tuple(related_ids)} ORDER BY PostTime"
+                AND FoundPost.StudentID = {user_id} AND PostID IN {tuple(related_ids)} ORDER BY PostTime DESC"
         try:
             if len(related_ids) == 1: 
                 cursor.execute(sql, related_ids[0])

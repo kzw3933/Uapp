@@ -1,111 +1,74 @@
-2023-05-21 20:18:53,850 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-21 20:27:07,891 - INFO - Success on mysql database initialize
-2023-05-21 20:27:08,070 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-21 20:31:04,495 - INFO - Success on mysql database initialize
-2023-05-21 20:31:04,673 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-21 20:34:47,761 - INFO - Success on mysql database initialize
-2023-05-21 20:34:47,903 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:29:16,189 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:30:40,969 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:32:11,962 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:34:04,053 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:43:45,143 - INFO - Success on mysql database initialize
-2023-05-23 22:43:45,235 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:45:39,710 - INFO - User 可达鸭233 register successful
-2023-05-23 22:45:41,175 - INFO - User with student_id PB2006 login succeed
-2023-05-23 22:45:41,182 - INFO - User with student_id PB2006 get his or her user-information successfully
-2023-05-23 22:46:57,048 - INFO - User with student_id PB2006 upload a post successfully
-2023-05-23 22:47:58,428 - INFO - User with student_id PB2006 upload a post successfully
-2023-05-23 22:52:24,197 - INFO - User with student_id PB2006 upload a post successfully
-2023-05-23 22:55:54,761 - INFO - Success on mysql database initialize
-2023-05-23 22:55:54,909 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 22:58:45,553 - INFO - Success on mysql database initialize
-2023-05-23 22:58:45,690 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 23:02:23,014 - INFO - Success on mysql database initialize
-2023-05-23 23:02:23,163 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 23:03:12,062 - INFO - User with student_id PB2006 upload a post successfully
-2023-05-23 23:04:27,253 - INFO - Success on mysql database initialize
-2023-05-23 23:04:27,392 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 23:41:15,681 - INFO - Success on mysql database initialize
-2023-05-23 23:41:15,988 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 23:53:29,447 - INFO - Success on mysql database initialize
-2023-05-23 23:53:29,734 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-23 23:59:18,634 - ERROR - Error happend when user with student_id PB101 upload post
-2023-05-24 00:00:06,622 - INFO - User hshsh register successful
-2023-05-24 00:00:15,475 - INFO - User with student_id 120 login succeed
-2023-05-24 00:00:15,484 - INFO - User with student_id 120 get his or her user-information successfully
-2023-05-24 00:00:34,408 - INFO - User with student_id 120 upload a post successfully
-2023-05-24 00:04:33,620 - INFO - Success on mysql database initialize
-2023-05-24 00:04:33,896 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 00:06:05,816 - INFO - Success on mysql database initialize
-2023-05-24 00:06:06,080 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 00:07:25,626 - INFO - Success on mysql database initialize
-2023-05-24 00:07:25,918 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 00:10:34,715 - INFO - Success on mysql database initialize
-2023-05-24 00:10:35,021 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 00:15:59,004 - INFO - User with student_id 120 upload a post successfully
-2023-05-24 19:04:16,309 - INFO - Success on mysql database initialize
-2023-05-24 19:04:16,659 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 19:08:00,393 - INFO - Success on mysql database initialize
-2023-05-24 19:08:00,655 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 19:39:22,083 - INFO - Success on mysql database initialize
-2023-05-24 19:39:22,376 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 19:41:18,212 - ERROR - Query post error:Packet sequence number wrong - got 102 expected 3
-2023-05-24 19:41:18,212 - ERROR - Query post error:'NoneType' object has no attribute 'read'
-2023-05-24 19:41:50,182 - ERROR - Query post error:(0, '')
-2023-05-24 19:42:00,969 - ERROR - Query post error:(0, '')
-2023-05-24 19:42:11,266 - ERROR - Query user error:(0, '')
-2023-05-24 19:44:05,075 - ERROR - Query user error:(0, '')
-2023-05-24 19:44:57,609 - INFO - Success on mysql database initialize
-2023-05-24 19:44:57,893 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 19:45:37,368 - ERROR - Query post error:Packet sequence number wrong - got 102 expected 1
-2023-05-24 19:45:37,369 - ERROR - Query post error:'NoneType' object has no attribute 'read'
-2023-05-24 19:45:59,865 - ERROR - Query user error:(0, '')
-2023-05-24 19:48:54,732 - INFO - Success on mysql database initialize
-2023-05-24 19:48:55,026 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 19:49:09,185 - ERROR - Query post error:'NoneType' object has no attribute 'read'
-2023-05-24 19:49:09,186 - ERROR - Query post error:(2013, 'Lost connection to MySQL server during query')
-2023-05-24 19:50:47,168 - ERROR - Query user error:(0, '')
-2023-05-24 20:02:30,145 - INFO - Success on mysql database initialize
-2023-05-24 20:02:30,407 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 21:50:38,197 - INFO - Success on mysql database initialize
-2023-05-24 21:50:38,485 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 21:55:37,072 - INFO - Success on mysql database initialize
-2023-05-24 21:55:37,539 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-24 22:01:55,760 - ERROR - Query user error:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
-2023-05-24 22:02:10,989 - INFO - User vhicr register successful
-2023-05-24 22:02:31,538 - INFO - User dbjdj register successful
-2023-05-25 11:23:44,684 - ERROR - Query post error:(2006, "MySQL server has gone away (BrokenPipeError(32, 'Broken pipe'))")
-2023-05-25 11:23:46,585 - ERROR - Query post error:(0, '')
-2023-05-25 11:23:49,643 - ERROR - Query post error:(0, '')
-2023-05-25 11:23:52,575 - ERROR - Query post error:(0, '')
-2023-05-25 11:24:08,407 - ERROR - Insert item error:(0, '')
-2023-05-25 11:24:09,527 - ERROR - Insert item error:(0, '')
-2023-05-25 11:24:10,448 - ERROR - Insert item error:(0, '')
-2023-05-25 11:24:11,406 - ERROR - Insert item error:(0, '')
-2023-05-25 11:24:12,062 - ERROR - Insert item error:(0, '')
-2023-05-25 11:47:37,651 - ERROR - Query post error:(0, '')
-2023-05-25 11:47:38,737 - ERROR - Query post error:(0, '')
-2023-05-25 11:47:39,807 - ERROR - Query post error:(0, '')
-2023-05-25 11:47:46,400 - ERROR - Query post error:(0, '')
-2023-05-25 12:19:44,495 - ERROR - Query post error:(0, '')
-2023-05-25 12:20:01,762 - ERROR - Query post error:(0, '')
-2023-05-25 12:20:35,606 - ERROR - Query post error:(0, '')
-2023-05-25 17:41:40,362 - ERROR - Query post error:(0, '')
-2023-05-25 22:46:35,527 - INFO - Success on mysql database initialize
-2023-05-25 22:46:35,814 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-26 08:05:33,171 - ERROR - Query post error:(2013, 'Lost connection to MySQL server during query')
-2023-05-26 11:20:30,087 - INFO - Success on mysql database initialize
-2023-05-26 11:20:30,372 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-26 12:33:25,040 - ERROR - Insert post error:(0, '')
-2023-05-26 12:33:57,640 - ERROR - Insert post error:(0, '')
-2023-05-26 12:36:14,621 - INFO - User hshsjs register successful
-2023-05-26 12:36:19,596 - INFO - User with student_id jzjsj login succeed
-2023-05-26 12:36:19,610 - INFO - User with student_id jzjsj get his or her user-information successfully
-2023-05-26 12:36:39,755 - ERROR - Insert post error:(0, '')
-2023-05-26 12:36:46,389 - ERROR - Insert post error:(0, '')
-2023-05-26 12:37:10,975 - ERROR - Update user error:(0, '')
-2023-05-26 12:40:52,514 - INFO - Success on mysql database initialize
-2023-05-26 12:40:52,805 - INFO - Uapp Server start and is listening on IP: 210.45.112.121, Port: 7860
-2023-05-26 12:41:52,772 - INFO - User with student_id jzjsj upload a post successfully
-2023-05-26 12:42:21,850 - INFO - User with student_id jzjsj upload a post successfully
+2023-06-04 19:03:31,215 - INFO - User with student_id PB12345678 login succeed
+2023-06-04 19:03:31,229 - INFO - User with student_id PB12345678 get his or her user-information successfully
+2023-06-04 19:45:02,789 - INFO - Success on mysql database initialize
+2023-06-04 19:45:03,077 - INFO - Uapp Server start and is listening on IP: 222.195.72.47, Port: 7860
+2023-06-04 19:45:57,091 - INFO - Success on mysql database initialize
+2023-06-04 19:45:57,378 - INFO - Uapp Server start and is listening on IP: 222.195.72.47, Port: 7860
+2023-06-04 19:55:56,135 - INFO - Success on mysql database initialize
+2023-06-04 19:55:56,424 - INFO - Uapp Server start and is listening on IP: 222.195.72.46, Port: 7860
+2023-06-04 20:11:51,780 - INFO - Success on mysql database initialize
+2023-06-04 20:11:52,067 - INFO - Uapp Server start and is listening on IP: 222.195.72.46, Port: 7860
+2023-06-04 20:41:43,724 - INFO - User with student_id PB12345678 upload a post successfully
+2023-06-04 20:44:45,455 - INFO - User jviwnwvinwvbni register successful
+2023-06-04 20:44:46,679 - INFO - User with student_id PB12344321 login succeed
+2023-06-04 20:44:46,688 - INFO - User with student_id PB12344321 get his or her user-information successfully
+2023-06-04 20:45:50,470 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-04 20:48:50,859 - INFO - Success on mysql database initialize
+2023-06-04 20:48:51,150 - INFO - Uapp Server start and is listening on IP: 222.195.72.46, Port: 7860
+2023-06-04 20:50:29,183 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-04 20:50:47,774 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-04 20:58:52,081 - INFO - Success on mysql database initialize
+2023-06-04 20:58:52,363 - INFO - Uapp Server start and is listening on IP: 222.195.72.46, Port: 7860
+2023-06-04 21:00:49,744 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-04 21:37:27,727 - INFO - Success on mysql database initialize
+2023-06-04 21:37:28,022 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-04 21:45:23,287 - INFO - Success on mysql database initialize
+2023-06-04 21:45:23,538 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-04 21:45:42,074 - INFO - Success on mysql database initialize
+2023-06-04 21:45:42,331 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 14:40:35,361 - INFO - Success on mysql database initialize
+2023-06-05 14:40:35,656 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 14:43:19,115 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-05 14:44:09,848 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-05 17:52:19,117 - INFO - Success on mysql database initialize
+2023-06-05 17:52:19,402 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 17:53:13,964 - INFO - Success on mysql database initialize
+2023-06-05 17:53:14,262 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 17:57:16,160 - INFO - Success on mysql database initialize
+2023-06-05 17:57:16,454 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:17:46,928 - INFO - Success on mysql database initialize
+2023-06-05 18:17:47,197 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:18:59,192 - INFO - User with student_id PB12344321 upload a post successfully
+2023-06-05 18:20:13,351 - INFO - Success on mysql database initialize
+2023-06-05 18:20:13,645 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:26:56,460 - INFO - User with student_id jzjsj upload a post successfully
+2023-06-05 18:28:57,822 - INFO - Success on mysql database initialize
+2023-06-05 18:28:58,087 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:29:01,686 - INFO - User with student_id jzjsj upload a post successfully
+2023-06-05 18:42:18,357 - INFO - Success on mysql database initialize
+2023-06-05 18:42:18,618 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:44:00,356 - ERROR - Insert post error:(1452, 'Cannot add or update a child row: a foreign key constraint fails (`UAPP`.`LostPost`, CONSTRAINT `LostPost_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `User` (`StudentID`))')
+2023-06-05 18:44:00,434 - ERROR - Error happend when user with student_id jzjsj upload post
+2023-06-05 18:45:11,372 - INFO - Success on mysql database initialize
+2023-06-05 18:45:11,662 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:46:37,825 - INFO - User VHICR register successful
+2023-06-05 18:46:55,881 - ERROR - Query user error:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+2023-06-05 18:46:57,050 - ERROR - Query user error:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+2023-06-05 18:47:02,651 - ERROR - Query user error:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%s' at line 1")
+2023-06-05 18:47:05,800 - INFO - User jack register successful
+2023-06-05 18:47:08,422 - INFO - User with student_id PB20061338 login succeed
+2023-06-05 18:47:08,432 - INFO - User with student_id PB20061338 get his or her user-information successfully
+2023-06-05 18:47:31,017 - INFO - User vhicrz register successful
+2023-06-05 18:47:33,467 - INFO - User with student_id PB20001243 login succeed
+2023-06-05 18:47:33,475 - INFO - User with student_id PB20001243 get his or her user-information successfully
+2023-06-05 18:48:51,080 - INFO - User with student_id PB20061338 upload a post successfully
+2023-06-05 18:48:53,547 - INFO - User with student_id PB20001243 upload a post successfully
+2023-06-05 18:50:57,558 - INFO - User with student_id PB20061338 upload a post successfully
+2023-06-05 18:51:30,695 - INFO - User with student_id PB20001243 upload a post successfully
+2023-06-05 18:51:39,908 - INFO - User with student_id PB20061338 upload a post successfully
+2023-06-05 18:52:34,375 - INFO - User with student_id PB20001243 upload a post successfully
+2023-06-05 18:57:55,652 - INFO - Success on mysql database initialize
+2023-06-05 18:57:55,941 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
+2023-06-05 18:59:42,722 - INFO - User with student_id PB20001243 upload a post successfully
+2023-06-05 19:28:41,251 - INFO - Success on mysql database initialize
+2023-06-05 19:28:41,557 - INFO - Uapp Server start and is listening on IP: 222.195.72.45, Port: 7860
